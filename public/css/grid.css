@@ -1,0 +1,35 @@
+.grid{
+display: grid;
+grid-template-columns: 50% 50%;
+grid-column-gap: 20px;  
+
+}
+
+
+
+@media (max-width:450px) {
+.grid{
+    grid-column-gap: 2px;
+}
+
+
+   
+}
+
+@media (max-width:740px) {
+    .grid{
+        grid-column-gap: 2px;
+    }
+    
+
+    hr{
+        display: none;   
+    }    
+       
+    }
+
+    .counter{
+        color: rgb(85, 85, 85);
+        font-weight: bold;
+            }
+        
