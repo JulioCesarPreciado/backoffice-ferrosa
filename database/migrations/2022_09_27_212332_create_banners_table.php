@@ -19,8 +19,9 @@ return new class extends Migration
             $table->string('subtitle')->nullable();
             $table->string('thumbnail');
             $table->string('url')->nullable();
-            $table->string('status')->default('CREADO DESDE SISTEMA');
+            $table->string('status')->default('ACTIVO');
             $table->string('validity')->default('ACTIVO');
+            $table->string('type');
             $table->bigInteger('id_user_created')->nullable();
             $table->bigInteger('id_user_updated')->nullable();
             $table->string('created_by')->nullable();
