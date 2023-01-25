@@ -150,7 +150,7 @@
             color="blue-500"
             id="button_return"
             name="button_return"
-            href="{{ route('banners.sliders.index') }}"
+            href="{{ route('banners', 'descuentos') }}"
             >
         </x-button-link>
         {{-- END button return --}}

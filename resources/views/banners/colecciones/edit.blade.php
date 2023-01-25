@@ -13,7 +13,7 @@
         title="{{ __('Edit')}} {{ __('Banner')}}"
         icon="fas fa-images"
         route='banner.update'
-        form='banners.sliders.form'
+        form='banners.colecciones.form'
         :item='$banner'
         :create='false'
         :show='false'

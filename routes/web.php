@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\BannerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,9 +30,10 @@ Route::group(['middleware' => 'auth'], function () {
     //Rutas para los banners sliders
     Route::resource('banner', 'App\Http\Controllers\BannerController');
     // Ruta que redirige a la vista de banners
-    Route::get('banners', function () {
-        return view('banners.sliders.index');
-    })->name('banners.sliders.index');
+    #Route::get('banners/{type?}', function ($type) {
+    #    return view('banners.colecciones.index');
+    #})->name('banners');
+    Route::get('/banners/{type}', [App\Http\Controllers\BannerController::class, 'getVistaBanner'])->name('banners');
     //Rutas para seo
     Route::resource('seo', 'App\Http\Controllers\SeoController');
     //Rutas para el faq

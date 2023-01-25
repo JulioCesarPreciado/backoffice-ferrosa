@@ -16,6 +16,18 @@ use Illuminate\Support\Facades\Storage;
 
 class BannerController extends Controller
 {
+
+    public function getVistaBanner($type)
+    {
+        if ($type == 'descuentos') {
+            return view('banners.descuentos.index');
+        } elseif ($type == 'caracteristicas') {
+            return view('banners.caracteristicas.index');
+        } else {
+            return view('banners.colecciones.index');
+        }
+    }
+
     // Función que retorna todos los banners al index.
     public function index()
     {
@@ -32,12 +44,13 @@ class BannerController extends Controller
     // Función que redirecciona a la vista create
     public function create()
     {
-        return view('banners.sliders.create');
+        return view('banners.colecciones.create');
     }
 
     // Función que almacena el nuevo registro en la BD
     public function store(Request $request)
     {
+        dd($request->input('button_return'));
         // Validación de los campos recibidos
         $request->validate([
             'title'     => 'required|string',
@@ -59,7 +72,7 @@ class BannerController extends Controller
             $data = [
                 'title' => $request->title,
                 'subtitle' => $request->subtitle,
-                'thumbnail' => env('APP_URL') . "/imagenes-banners/". $file->hashName(),
+                'thumbnail' => env('APP_URL') . "/imagenes-banners/" . $file->hashName(),
                 'url' => $request->url,
                 'status' => $request->validity ? 'ACTIVO' : 'INACTIVO',
                 'validity' => $request->validity ? 'ACTIVO' : 'INACTIVO',
@@ -80,7 +93,7 @@ class BannerController extends Controller
                 'alert-type' => 'success'
             );
             // Retorna a la vista
-            return redirect()->route('banners.sliders.index')->with($notification);
+            return redirect()->route('banners.colecciones.index')->with($notification);
         } catch (QueryException $e) {
             // Alerta de error
             $notification = array(
@@ -95,13 +108,13 @@ class BannerController extends Controller
     // Función que manda a la vista show
     public function show(Banner $banner)
     {
-        return view('banners.sliders.show', compact('banner'));
+        return view('banners.colecciones.show', compact('banner'));
     }
 
     // Función que manda a la vista edit
     public function edit(Banner $banner)
     {
-        return view('banners.sliders.edit', compact('banner'));
+        return view('banners.colecciones.edit', compact('banner'));
     }
 
     // Función que actualiza el registro en la BD
@@ -137,8 +150,7 @@ class BannerController extends Controller
                 $file->store('/', 'banners');
 
                 //creo la nueva url para la imagen
-                $thumbnail = env('APP_URL') . "/imagenes-banners/". $file->hashName();
-
+                $thumbnail = env('APP_URL') . "/imagenes-banners/" . $file->hashName();
             } else {
                 $thumbnail = $banner->thumbnail;
             }
@@ -166,7 +178,7 @@ class BannerController extends Controller
                 'alert-type' => 'success'
             );
             // Retorna a la vista
-            return redirect()->route('banners.sliders.index')->with($notification);
+            return redirect()->route('banners.colecciones.index')->with($notification);
         } catch (QueryException $e) {
             // Alerta de error
             $notification = array(

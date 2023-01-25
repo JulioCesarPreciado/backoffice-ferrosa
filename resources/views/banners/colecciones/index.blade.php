@@ -5,12 +5,12 @@
 @endsection
 {{-- Nombre en el header --}}
 @section('header')
-    {{ __('Banners') }}
+    {{ __('Product collections') }}
 @endsection
 {{-- Contenido --}}
 @section('content')
     <x-table.grid-js
-        title="{{ __('Banners') }}"
+        title="{{ __('Product collections') }}"
         icon="fas fa-images"
         url="banner"
         parameter="banner"

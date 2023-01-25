@@ -1,5 +1,5 @@
 <li class="items-center">
-    <a href="{{ route( $href ) }}"
+    <a href= {{$href}}
         class="text-xs uppercase py-3 font-bold block
         @if ($route == $href)
         text-blue-500 hover:text-blue-600
