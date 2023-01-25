@@ -79,5 +79,5 @@ Route::group(['middleware' => 'auth'], function () {
     // About
     Route::resource('about', 'App\Http\Controllers\AboutController');
 
-    Route::post('/user/delete', [App\Http\Controllers\UserController::class, 'delete'])->name('user.delete');
+    //Route::post('/user/delete', [App\Http\Controllers\UserController::class, 'delete'])->name('user.delete');
 });
