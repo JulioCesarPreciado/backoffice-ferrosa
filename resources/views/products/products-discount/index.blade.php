@@ -27,8 +27,19 @@
                 hidden: true
             },
             {
-                id: 'product_id',
-                name: "{{ __('Product id') }}",
+                id: 'image',
+                name: "{{ __('Product Image') }}",
+                formatter: (cell, row) => {
+                    srcStr = row.cells[1].data;
+
+                    var img = h('img', {
+                        src: "data:image/png;base64," +srcStr,
+                        className: 'm-2 object-cover',
+                        style: 'height: 77px;'
+                    }, '');
+                    return img;
+                }
+
             },
             {
                 id: 'discount_start_date',
@@ -41,6 +52,10 @@
             {
                 id: 'percentage',
                 name: "{{ __('Percentage') }}",
+            },
+            {
+                id: 'discount',
+                name: "{{ __('Discount') }}",
             },
             {
                 id: 'status',

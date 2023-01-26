@@ -213,12 +213,12 @@
                             @endif
 
                         @if ($delete)
-                            if(row.cells[5].data == 'ACTIVO') {
+                            if(row.cells[row.cells.length-2].data == 'ACTIVO') {
                                 var deletethis = h('button', {
                                     className: 'fas fa-trash p-4  mr-1  text-white p-3 text-center inline-flex items-center justify-center w-10  shadow-lg rounded-full bg-red-500',
                                     onClick: () => myConfirm(row.cells[0].data),
                                 }, '');
-                            } else if(row.cells[5].data == 'INACTIVO') {
+                            } else if(row.cells[row.cells.length-2].data == 'INACTIVO') {
                                 var deletethis = h('button', {
                                     className: 'fas fa-trash p-5  text-white p-3 text-center inline-flex items-center justify-center w-10  shadow-lg rounded-full bg-gray-400 ',
                                     disabled: true
