@@ -144,7 +144,6 @@
                     href="{{ route('banners', 'descuentos') }}">
                     </x-sidebar.list-item>
                     {{-- END discounts --}}
-
                 </x-slot>
             </x-sidebar.unordered-list>
             {{-- END Banners --}}

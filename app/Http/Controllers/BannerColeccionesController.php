@@ -1,33 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use App\Models\Banner;
 use Carbon\Carbon;
-use Exception;
 use Illuminate\Database\QueryException;
-// use Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 
-class BannerController extends Controller
+class BannerColeccionesController extends Controller
 {
-
-    public function getVistaBanner($type)
-    {
-        if ($type == 'descuentos') {
-            return view('banners.descuentos.index');
-        } elseif ($type == 'caracteristicas') {
-            return view('banners.caracteristicas.index');
-        } else {
-            return view('banners.colecciones.index');
-        }
-    }
-
     // Función que retorna todos los banners al index.
     public function index()
     {
@@ -47,17 +30,30 @@ class BannerController extends Controller
         return view('banners.colecciones.create');
     }
 
+    // Función que manda a la vista show
+    public function show(Banner $banner)
+    {
+        return view('banners.colecciones.show', compact('banner'));
+    }
+
+    // Función que manda a la vista edit
+    public function edit(Banner $banner)
+    {
+        return view('banners.colecciones.edit', compact('banner'));
+    }
+
+
     // Función que almacena el nuevo registro en la BD
     public function store(Request $request)
     {
-        dd($request->input('button_return'));
         // Validación de los campos recibidos
         $request->validate([
-            'title'     => 'required|string',
-            'subtitle'  => 'nullable|string',
-            'thumbnail' => 'required|image',
-            'url'       => 'nullable|url',
-            'validity'  => 'nullable|string',
+            'title'     =>  'required|string',
+            'subtitle'  =>  'nullable|string',
+            'thumbnail' =>  'required|image',
+            'url'       =>  'nullable|url',
+            'validity'  =>  'nullable|string',
+            'descuentos' => 'nullable|int',
         ]);
 
         try {
@@ -85,7 +81,7 @@ class BannerController extends Controller
             ];
 
             // Inserta el nuevo registro a la BD y obtengo su ID
-            $banner = Banner::create($data)->id;
+            Banner::create($data)->id;
 
             // Alerta de exito
             $notification = array(
@@ -93,7 +89,7 @@ class BannerController extends Controller
                 'alert-type' => 'success'
             );
             // Retorna a la vista
-            return redirect()->route('banners.colecciones.index')->with($notification);
+            return redirect()->route('banners', 'colecciones')->with($notification);
         } catch (QueryException $e) {
             // Alerta de error
             $notification = array(
@@ -105,17 +101,7 @@ class BannerController extends Controller
         }
     }
 
-    // Función que manda a la vista show
-    public function show(Banner $banner)
-    {
-        return view('banners.colecciones.show', compact('banner'));
-    }
 
-    // Función que manda a la vista edit
-    public function edit(Banner $banner)
-    {
-        return view('banners.colecciones.edit', compact('banner'));
-    }
 
     // Función que actualiza el registro en la BD
     public function update(Request $request, Banner $banner)

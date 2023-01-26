@@ -28,12 +28,12 @@ Route::group(['middleware' => 'auth'], function () {
         return view('pending_reviews.index');
     })->name('pending_reviews');
     //Rutas para los banners sliders
-    Route::resource('banner', 'App\Http\Controllers\BannerController');
+    Route::resource('banner', 'App\Http\Controllers\BannerColeccionesController');
     // Ruta que redirige a la vista de banners
-    #Route::get('banners/{type?}', function ($type) {
-    #    return view('banners.colecciones.index');
-    #})->name('banners');
-    Route::get('/banners/{type}', [App\Http\Controllers\BannerController::class, 'getVistaBanner'])->name('banners');
+    Route::get('banners/{type?}', function ($type) {
+        return view('banners.colecciones.index');
+    })->name('banners');
+    Route::get('/banners/{type}', [App\Http\Controllers\BannerColeccionesController::class, 'getVistaBanner'])->name('banners');
     //Rutas para seo
     Route::resource('seo', 'App\Http\Controllers\SeoController');
     //Rutas para el faq

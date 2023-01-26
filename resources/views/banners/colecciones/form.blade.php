@@ -162,8 +162,8 @@
             <x-button-submit
                 title="{{ __('Save') }}"
                 color="green"
-                id="button_submit"
-                name="button_submit"
+                id="button_submit_colecciones"
+                name="button_submit_colecciones"
                 >
             </x-button-submit>
             {{-- END button submit --}}
