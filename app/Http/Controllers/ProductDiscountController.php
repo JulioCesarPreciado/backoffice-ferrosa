@@ -21,6 +21,7 @@ class ProductDiscountController extends Controller
             return[
                 'id'                    => $product_discount->id,
                 'image'                 => $product_discount->producto->thumbnail,
+                'product_name'          => $product_discount->producto->name,
                 'discount_start_date'   => $product_discount->discount_start_date,
                 'discount_end_date'     => $product_discount->discount_end_date,
                 'percentage'            => $product_discount->percentage,
@@ -105,9 +106,9 @@ class ProductDiscountController extends Controller
     {
         // Validación de los campos recibidos
         $request->validate([
-            'product_id'            => 'required',
+            'product_id'            => 'required|!exists:product_discounts,product_id|unique:product_discounts,product_id,' .$product_discount->product_id,
             'discount_start_date'   => 'required',
-            'discount_end_date'     => 'required',
+            'discount_end_date'     => 'required|after_or_equal:discount_start_date',
             'percentage'            => 'required',
             'discount'              => 'required',           
         ], [

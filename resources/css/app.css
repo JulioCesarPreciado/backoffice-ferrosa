@@ -6,3 +6,11 @@
     grid-template-columns: 50% 50%;
 }
 /* agegar el grid a responsive desing */
+
+.select2-prueba {
+    @apply border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150;
+}
+
+.select2-dropdown {
+    @apply absolute block w-auto box-border bg-white border-solid border-2 border-gray-600 z-50 float-left;
+}

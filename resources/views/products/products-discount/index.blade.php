@@ -31,19 +31,21 @@
                 name: "{{ __('Product Image') }}",
                 formatter: (cell, row) => {
                     srcStr = row.cells[1].data;
-
-                    var img = h('img', {
-                        src: "data:image/png;base64," +srcStr,
-                        className: 'm-2 object-cover',
-                        style: 'height: 77px;'
-                    }, '');
-                    return img;
+                    var img_src = "data:image/png;base64," +srcStr
+                    value_cell = gridjs.html(
+                        `<div class="flex justify-around items-center">
+                            <img src=${img_src} class="m-2 object-cover rounded-full shadow-lg" style="height: 77px; width:77px;">   
+                            <span class="ml-4">${row.cells[2].data}</span> 
+                        </div>`
+                    )
+                    return value_cell;
                 }
 
             },
             {
-                id: 'discount_start_date',
-                name: "{{ __('Start date') }}",
+                id: 'product_name',
+                name: "{{ __('Product name') }}",
+                hidden: true
             },
             {
                 id: 'discount_end_date',
@@ -52,10 +54,6 @@
             {
                 id: 'percentage',
                 name: "{{ __('Percentage') }}",
-            },
-            {
-                id: 'discount',
-                name: "{{ __('Discount') }}",
             },
             {
                 id: 'status',

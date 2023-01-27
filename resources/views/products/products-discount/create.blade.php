@@ -34,10 +34,10 @@
                             <label for="vigencia_inicial" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                                 {{ __('Initial term') }}</label>
                             <select name="product_id"
-                                class="js-example-basic-single border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                class="js-example-basic-single select2-dropdown"
                                 required>
                                 @foreach ($productos as $producto)
-                                    <option value="{{ $producto->id }}">{{ $producto->name }}</option>
+                                    <option title="{{$producto->thumbnail}}" value="{{ $producto->id }}">{{ $producto->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -60,15 +60,26 @@
                                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                 placeholder="{{ __('End Effective Date') }}" required>
                         </div>
-                        <div>
-                            <input id="percentage" name="percentage" placeholder="Porcentaje"
+                        <div
+                            class="flex flex-wrap items-center border-none border-teal-500 w-full  md:w-32-6per pt-5 md:pt-0">
+                            <label for="percentage" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                                {{ __('Percentage') }}</label>
+                            <input id="percentage" name="percentage" placeholder="Porcentaje" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                 value="{{ old('percentage') }}"
                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                         </div>
-                        <div>
-                            <input placeholder="Discount" name="discount" value="{{ old('discount') }}">
+                        <div 
+                            class="flex flex-wrap items-center border-none border-teal-500 w-full  md:w-32-6per pt-5 md:pt-0">
+                            <label for="discount" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                                {{ __('Discount') }}</label>
+                            <input placeholder="Discount" name="discount" value="{{ old('discount') }}" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 mb-12">
                         </div>
-                        <button type="submit" class="bg-blue-600 p-4 rounded-lg shadow-lg">Enviar</button>
+                        <div class="flex items-center justify-start w-full mb-4 ml-3 pr-6 mt-10">
+                            <button type="submit"
+                                class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 w-full ease-in-out hover:bg-indigo-600 bg-blue-600 rounded text-white px-8 py-2 text-sm">
+                                {{ __('Save') }}</button>
+    
+                        </div>
                     </form>
                 </div>
             </div>
@@ -86,14 +97,13 @@
                 }
                 var baseUrl = "/user/pages/images/flags";
                 var $state = $(
-                    '<span><img src="' + baseUrl + '/' + state.element.value.toLowerCase() +
-                    '.png" class="img-flag" /> ' + state.text + '</span>'
+                    '<div class="flex justify-around items-center"><img src="data:image/png;base64,' + state.title + '" class="m-2 object-cover rounded-full shadow-lg" style="height: 77px; width:77px;" /><span class="ml-4">' + state.text + '</span></div>'
                 );
                 return $state;
             };
             
             $('.js-example-basic-single').select2({
-                templateResult: formatState
+                templateResult: formatState,
             });
         });
 
