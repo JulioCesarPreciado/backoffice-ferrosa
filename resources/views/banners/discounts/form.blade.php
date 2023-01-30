@@ -44,18 +44,6 @@
         </x-input.image>
         {{-- END input thumbnail --}}
     </div>
-    <div class="w-full px-4">
-    <x-input.number
-            id='percentaje'
-            name='percentaje'
-            title='percentaje'
-            :value='$create ? null : $item->percentaje'
-            :required=false
-            :create='$create'
-            :show='$show'
-            :edit='$edit'>
-    </x-input.number>
-</div>
 
     <div class="w-full px-4">
         <div class="relative w-full mb-3">

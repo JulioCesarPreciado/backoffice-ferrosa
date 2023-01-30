@@ -135,10 +135,22 @@
                 <x-slot name="list_items">
 
                     {{-- START Slider --}}
-                    <x-sidebar.list-item title='Sliders' icon='fa fa-images' :route='$route'
+                    <x-sidebar.list-item title='Collections' icon='fa fa-images' :route='$route'
                         href='banners.sliders.index'>
                     </x-sidebar.list-item>
                     {{-- END Slider --}}
+
+                    {{-- START Slider --}}
+                       <x-sidebar.list-item title='Product discounts' icon='fa fa-images' :route='$route'
+                       href='banners.sliders.index'>
+                   </x-sidebar.list-item>
+                   {{-- END Slider --}}
+
+                      {{-- START Slider --}}
+                      <x-sidebar.list-item title='Product feature' icon='fa fa-images' :route='$route'
+                      href='banners.sliders.index'>
+                  </x-sidebar.list-item>
+                  {{-- END Slider --}}
 
                 </x-slot>
             </x-sidebar.unordered-list>

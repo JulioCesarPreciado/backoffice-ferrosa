@@ -120,7 +120,13 @@
     "Coupon name already exists": "El nombre del cupón ya existe",
     "Active": "ACTIVO",
     "Inactive": "INACTIVO",
+<<<<<<< HEAD
     "Products": "Productos",
     "Discounts": "Descuentos",
     "product-discount": "producto con descuento" 
+=======
+    "Collections": "Colecciones",
+    "Product discounts": "Descuentos",
+    "Product feature": "Caracteristicas"
+>>>>>>> 78521cec87e7f77c8f7d42b02797467d885ae417
 }
