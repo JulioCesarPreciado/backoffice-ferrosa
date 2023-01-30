@@ -39,7 +39,7 @@ class ProductDiscountController extends Controller
     public function create()
     {
 
-        $productos = Product::where('validity', '=', 'ACTIVO')->get();
+        $productos = Product::Select('id', 'name', 'price', 'thumbnail')->where('validity', '=', 'ACTIVO')->get();
 
         return view('products.products-discount.create', [
             "productos" => $productos
@@ -56,9 +56,9 @@ class ProductDiscountController extends Controller
             'discount'              => 'required',           
         ], [
             'product_id.required'           => __('The product is required'),
-            'product_id.unique'             => __('Este product ya tiene un descuento'),
-            'discount_start_date.required'  => __('The start date is required'),
-            'discount_end_date.required'    => __('The end date is required'),
+            'product_id.unique'             => __('The selected product already has a discount'),
+            'discount_start_date.required'  => __('The discount start date is required'),
+            'discount_end_date.required'    => __('The discount end date is required'),
             'percentage.required'           => __('The percentage is required'),
             'discount.required'             => __('The discount is required')
         ]);
@@ -69,7 +69,7 @@ class ProductDiscountController extends Controller
 
             // Alerta de exito
             $notification = array(
-                'message' => __('Record created!'),
+                'message' => __('Product discount created!'),
                 'alert-type' => 'success'
             );
             // Retorna a la vista
@@ -96,7 +96,7 @@ class ProductDiscountController extends Controller
     // Función que manda a la vista edit
     public function edit(ProductDiscount $product_discount)
     {
-        $productos = Product::where('validity', '=', 'ACTIVO')->get();
+        $productos = Product::Select('id', 'name', 'price', 'thumbnail')->where('validity', '=', 'ACTIVO')->get();
 
         return view('products.products-discount.edit', compact('product_discount', 'productos'));
     }
@@ -106,16 +106,16 @@ class ProductDiscountController extends Controller
     {
         // Validación de los campos recibidos
         $request->validate([
-            'product_id'            => 'required|!exists:product_discounts,product_id|unique:product_discounts,product_id,' .$product_discount->product_id,
+            'product_id'            => 'required|unique:product_discounts,product_id,' .$product_discount->id,
             'discount_start_date'   => 'required',
             'discount_end_date'     => 'required|after_or_equal:discount_start_date',
             'percentage'            => 'required',
             'discount'              => 'required',           
         ], [
             'product_id.required'           => __('The product is required'),
-            'product_id.unique'             => __('Este product ya tiene un descuento'),
-            'discount_start_date.required'  => __('The start date is required'),
-            'discount_end_date.required'    => __('The end date is required'),
+            'product_id.unique'             => __('The selected product already has a discount'),
+            'discount_start_date.required'  => __('The discount start date is required'),
+            'discount_end_date.required'    => __('The discount end date is required'),
             'percentage.required'           => __('The percentage is required'),
             'discount.required'             => __('The discount is required')
         ]);
@@ -139,7 +139,7 @@ class ProductDiscountController extends Controller
 
             // Alerta de exito
             $notification = array(
-                'message' => __('Record updated!'),
+                'message' => __('Product discount updated!'),
                 'alert-type' => 'success'
             );
             // Retorna a la vista

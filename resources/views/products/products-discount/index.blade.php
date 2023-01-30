@@ -28,7 +28,7 @@
             },
             {
                 id: 'image',
-                name: "{{ __('Product Image') }}",
+                name: "{{ __('Product description') }}",
                 formatter: (cell, row) => {
                     srcStr = row.cells[1].data;
                     var img_src = "data:image/png;base64," +srcStr
@@ -49,11 +49,14 @@
             },
             {
                 id: 'discount_end_date',
-                name: "{{ __('End date') }}",
+                name: "{{ __('Discount end date') }}",
             },
             {
                 id: 'percentage',
                 name: "{{ __('Percentage') }}",
+                formatter: (cell, row) => {
+                    return cell + " %"
+                }
             },
             {
                 id: 'status',

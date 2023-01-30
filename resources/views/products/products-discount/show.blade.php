@@ -17,55 +17,59 @@
                         <h6 class="text-slate-700 text-xl font-bold">
                             <div
                                 class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-blue-700">
-                                <i class="fas fa-image"></i>
+                                <i class="fas fa-user-tag"></i>
                             </div>
                             {{ __('Discounts') }}
                         </h6>
                     </div>
                 </div>
                 <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-                    @include('layouts.alert')
-                    <form method="POST" action="{{ route('product-discount.store') }}" enctype="multipart/form-data"
-                        autocomplete="off">
-                        @csrf
                         <div class="flex justify-center">
                         <div
                             class="flex flex-wrap items-center border-none border-teal-500 w-full  md:w-32-6per pt-5 md:pt-0">
                             <div class="flex flex-col justify-around items-center w-full">
                                 <img src="data:image/png;base64,{{ $product_discount->producto->thumbnail }}"
                                     class="m-2 object-cover rounded-full shadow-lg" style="height: 200px; width:200px;" />
-                                <span class="ml-4">{{ $product_discount->producto->name }}</span>
+                                <span class="mt-2">{{ $product_discount->producto->name }}</span>
                             </div>
                         </div>
                         <div
                             class="flex flex-wrap items-center border-none border-teal-500 md:w-32-6per pt-5 md:pt-0 p-4">
 
-                            <label for="vigencia_inicial" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
-                                {{ __('Initial term') }}</label>
-                            <input name="discount_start_date" id="vigencia_inicial"
+                            <label for="discount_start_date" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                                {{ __('Discount start date') }}</label>
+                            <input name="discount_start_date" id="discount_start_date"
                                 value="{{ $product_discount->discount_start_date }}"
                                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                placeholder="{{ __('Effective Date Initial') }}" required disabled>
+                                placeholder="{{ __('Discount start date') }}" required disabled>
                         </div>
 
                         <div
                             class="flex flex-wrap items-center border-none border-teal-500 p-4 md:w-32-6per pt-5 md:pt-0">
 
-                            <label for="vigencia_final" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
-                                {{ __('Final term') }}</label>
-                            <input name="discount_end_date" id="vigencia_final"
+                            <label for="discount_end_date" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                                {{ __('Discount end date') }}</label>
+                            <input name="discount_end_date" id="discount_end_date"
                                 value="{{ $product_discount->discount_end_date }}"
                                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                placeholder="{{ __('End Effective Date') }}" required disabled>
+                                placeholder="{{ __('Discount end date') }}" required disabled>
                         </div>
+                        </div>
+                        <div
+                            class="flex flex-wrap items-center border-none border-teal-500 w-full  md:w-32-6per pt-5 md:pt-0">
+                            <label for="discount" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                                {{ __('Product price') }}</label>
+                            <input placeholder="{{ __('Product price') }}" name="product_price" value="$ {{ $product_discount->producto->price }}"
+                                disabled
+                                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                         </div>
                         <div
                             class="flex flex-wrap items-center border-none border-teal-500 w-full md:w-32-6per pt-5 md:pt-0">
                             <label for="percentage" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                                 {{ __('Percentage') }}</label>
-                            <input id="percentage" name="percentage" placeholder="Porcentaje"
+                            <input id="percentage" name="percentage" placeholder="{{ __('Percentage') }}"
                                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                value="{{ $product_discount->percentage }}"
+                                value="{{ $product_discount->percentage }} %"
                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
                                 disabled>
                         </div>
@@ -73,11 +77,17 @@
                             class="flex flex-wrap items-center border-none border-teal-500 w-full  md:w-32-6per pt-5 md:pt-0">
                             <label for="discount" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                                 {{ __('Discount') }}</label>
-                            <input placeholder="Discount" name="discount" value="{{ $product_discount->discount }}"
+                            <input placeholder="{{ __('Discount') }}" name="discount" value="$ {{ $product_discount->discount }}"
                                 disabled
                                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                         </div>
-                    </form>
+                        <div class="flex flex-wrap mt-6">
+                            <div class="w-full md:w-1/2 px-4">
+                                <a href="{{ route('products.discount.index') }}" class="bg-blue-500 text-white active:bg-blue-500 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button">
+                                    {{ __('Return') }}
+                                </a>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>
@@ -92,7 +102,6 @@
                 if (!state.id) {
                     return state.text;
                 }
-                var baseUrl = "/user/pages/images/flags";
                 var $state = $(
                     '<div class="flex justify-around items-center"><img src="data:image/png;base64,' + state
                     .title +
@@ -107,10 +116,8 @@
             });
 
             /* Recuperando la instancia de flatpickr */
-            flatpickr("#vigencia_inicial", {inline:true,allowInput: false, theme: material_green});
-            flatpickr("#vigencia_final", {inline:true, allowInput: false});
-            flatpickr("#vigencia_inicial_edit", {});
-            flatpickr("#vigencia_final_edit", {});
+            flatpickr("#discount_start_date", {inline:true,allowInput: false});
+            flatpickr("#discount_end_date", {inline:true, allowInput: false});
         });
     </script>
 @endpush
