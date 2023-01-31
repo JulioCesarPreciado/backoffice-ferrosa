@@ -10,7 +10,7 @@ htmlFor="iframe_{{ $name }}">
     height="600"
 
     @if (!$value)
-        src="{{ asset('public/img/no_image.jpg') }}"
+        src="{{ asset('img/no_image.jpg') }}"
     @else
         src="{{ $value }}"
     @endif

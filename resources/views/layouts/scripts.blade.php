@@ -1,45 +1,45 @@
 {{-- App js --}}
-<script src="{{ asset('public/js/app.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 {{-- Tailwind element js --}}
-<script src="{{ asset('public/resources/js/app.js') }}"></script>
+<script src="{{ asset('resources/js/app.js') }}"></script>
 {{-- JQuery --}}
-<script src="{{ asset('public/js/jquery-3.6.0.min.js') }}"></script>
+<script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
 {{-- Datatable --}}
-<script src="{{ asset('public/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
 {{-- Poppers --}}
-<script src="{{ asset('public/js/popper.js') }}"></script>
+<script src="{{ asset('js/popper.js') }}"></script>
 {{-- FontAwesome --}}
-<script src="{{ asset('public/js/fontawesome.js') }}" crossorigin="anonymous"></script>
+<script src="{{ asset('js/fontawesome.js') }}" crossorigin="anonymous"></script>
 {{-- Chartjs --}}
-<script src="{{ asset('public/js/Chart.min.js') }}" charset="utf-8"></script>
+<script src="{{ asset('js/Chart.min.js') }}" charset="utf-8"></script>
 {{-- Sweetalert2 --}}
-<script src="{{ asset('public/js/sweetalert2.js') }}"></script>
+<script src="{{ asset('js/sweetalert2.js') }}"></script>
 {{-- Toastr --}}
-<script src="{{ asset('public/js/toastr.min.js') }}"></script>
+<script src="{{ asset('js/toastr.min.js') }}"></script>
 <!--  Heatmap -->
-<script src="{{ asset('public/js/heatmap.min.js')}}"></script>
+<script src="{{ asset('js/heatmap.min.js')}}"></script>
 {{-- leaflet --}}
-<script src="{{ asset('public/js/leaflet.js') }}"></script>
+<script src="{{ asset('js/leaflet.js') }}"></script>
 {{-- GeoJson --}}
-<script src="{{ asset('public/js/geojson.js') }}"></script>
+<script src="{{ asset('js/geojson.js') }}"></script>
 <!-- MarkersCluster -->
-<script src="{{ asset('public/js/leaflet.markercluster.js') }}"></script>
+<script src="{{ asset('js/leaflet.markercluster.js') }}"></script>
 {{-- Mapa --}}
-<script src="{{ asset('public/js/mapas.js') }}"></script>
+<script src="{{ asset('js/mapas.js') }}"></script>
 <!--Leaflet Heatmap -->
 <script src="https://cdn.rawgit.com/pa7/heatmap.js/develop/plugins/leaflet-heatmap/leaflet-heatmap.js"></script>
 {{-- Datepicker --}}
-<script src="{{ asset('public/js/datepicker.min.js') }}"></script>
+<script src="{{ asset('js/datepicker.min.js') }}"></script>
 {{-- JSGRID 1.53 --}}
-<script src="{{ asset('public/js/jsgrid.min.js') }}"></script>
+<script src="{{ asset('js/jsgrid.min.js') }}"></script>
 {{-- GRID JS --}}
-<script src="{{ asset('public/js/gridjs.umd.js') }}"></script>
+<script src="{{ asset('js/gridjs.umd.js') }}"></script>
 {{-- Preact --}}
-<script src="{{ asset('public/js/preact.min.js') }}"></script>
+<script src="{{ asset('js/preact.min.js') }}"></script>
 {{-- gridjs --}}
-<script src="{{ asset('public/js/gridjs.production.min.js') }}"></script>
+<script src="{{ asset('js/gridjs.production.min.js') }}"></script>
 {{-- Select2 --}}
-<script src="{{ asset('public/js/select2.min.js') }}"></script>
+<script src="{{ asset('js/select2.min.js') }}"></script>
 {{-- flatpickr js --}}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 {{-- Scripts template --}}

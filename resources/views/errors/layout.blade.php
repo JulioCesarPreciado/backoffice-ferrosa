@@ -16,7 +16,7 @@
     <title>{{ $setting->name }} - Error: @yield('title')</title>
 
     @if (isset($setting->icon))
-        <link rel="icon" href="{{ asset('public/upload/site_setting/' . $setting->icon) }}">
+        <link rel="icon" href="{{ asset('upload/site_setting/' . $setting->icon) }}">
     @endif
     {{-- CSS --}}
     @include('errors.css')

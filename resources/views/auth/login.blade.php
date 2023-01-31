@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @php
         $setting = App\Models\Config::first();
     @endphp
@@ -15,7 +15,7 @@
     @if (isset($setting->icon))
         <link rel="icon" href="{{ $setting->icon }}">
     @else
-        <link rel="icon" href="{{ asset('public/favicon.ico') }}">
+        <link rel="icon" href="{{ asset('favicon.ico') }}">
     @endif
 </head>
 
@@ -24,7 +24,7 @@
         @if (isset($setting->background))
             style="background-image: url({{ $setting->background }})"
         @else
-            style="background-image: url({{ asset('public/img/bg.jpeg') }})"
+            style="background-image: url({{ asset('img/bg.jpeg') }})"
         @endif>
         <div
             @if (isset($setting->color))
