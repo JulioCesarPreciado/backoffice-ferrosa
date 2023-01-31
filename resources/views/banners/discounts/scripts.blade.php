@@ -142,7 +142,7 @@
                 name: "{{ __('Thumbnail') }}",
                 formatter: (cell, row) => {
                     console.log(row.cells[1].data);
-                    var srcStr = "{{ asset('storage/upload/banner/value') }}";
+                    var srcStr = "{{ asset('public/storage/upload/banner/value') }}";
                     srcStr = srcStr.replace('value', row.cells[1].data);
 
                     var img = h('img', {

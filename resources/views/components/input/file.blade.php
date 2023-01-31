@@ -4,7 +4,7 @@
 
 <img id="preview_{{ $name }}" name="preview_{{ $name }}" style="height: 200px;" class="mb-2 object-cover"
     @if (!$value)
-    src="{{ asset('img/no_image.jpg') }}"
+    src="{{ asset('public/img/no_image.jpg') }}"
     @else
     src="{{ $value }}"
     @endif>

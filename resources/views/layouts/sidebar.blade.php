@@ -46,7 +46,7 @@
                         <span
                             class="w-12 h-12 text-sm text-slate-700 bg-slate-400 inline-flex items-center justify-center rounded-full">
                             <img alt="profile picture" class="w-full rounded-full align-middle border-none shadow-lg"
-                                src="{{ Auth::user()->profile_photo_url ?? asset('img/user.png') }}" />
+                                src="{{ Auth::user()->profile_photo_url ?? asset('public/img/user.png') }}" />
                         </span>
                     </div>
                 </a>
@@ -80,9 +80,9 @@
                         <a class="md:block text-left md:pb-2 text-slate-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
                             href="{{ route('dashboard') }}">
                             @if (isset($setting->logo))
-                                <img class="h-10" src="{{ asset('storage/upload/site_setting/' . $setting->logo) }}">
+                                <img class="h-10" src="{{ asset('public/storage/upload/site_setting/' . $setting->logo) }}">
                             @else
-                                <img class="h-10" src="{{ asset('img/no_image.jpg') }}">
+                                <img class="h-10" src="{{ asset('public/img/no_image.jpg') }}">
                             @endif
                         </a>
                     </div>

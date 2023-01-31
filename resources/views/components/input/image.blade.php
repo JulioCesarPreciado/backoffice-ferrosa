@@ -4,7 +4,7 @@
     {{ __($title) }}
 </label>
 <img id="preview_{{ $name }}" name="preview_{{ $name }}" style="height: 200px;" class="mb-2 object-cover"
-    @if (!$value) src="{{ asset('img/no_image.jpg') }}"
+    @if (!$value) src="{{ asset('public/img/no_image.jpg') }}"
     @else
     src="{{ asset($value) }}"
     @endif
@@ -22,7 +22,7 @@
 @endif
 
 {{-- JQuery --}}
-<script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+<script src="{{ asset('public/js/jquery-3.6.0.min.js') }}"></script>
 
 {{-- Código para la vista previa de la imagen al crear --}}
 <script type="text/javascript">

@@ -9,7 +9,7 @@
                     <span
                         class="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full"><img
                             alt="..." class="w-full rounded-full align-middle border-none shadow-lg"
-                            src="{{ Auth::user()->profile_photo_url ?? asset('img/user.png') }}" /></span>
+                            src="{{ Auth::user()->profile_photo_url ?? asset('public/img/user.png') }}" /></span>
                 </div>
             </a>
             <div class="hidden bg-white text-base text-center z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"

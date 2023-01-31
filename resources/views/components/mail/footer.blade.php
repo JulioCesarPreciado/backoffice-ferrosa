@@ -9,7 +9,7 @@
     style="margin-left:20px; margin-right:20px;">
     <tbody>
         <tr>
-            <td align="center" valign="top" style="background-image: url({{ asset('assets/img/bg-footer.png') }}"
+            <td align="center" valign="top" style="background-image: url({{ asset('public/assets/img/bg-footer.png') }}"
                 style="background-size:cover; background-position:top; height="400""="">
                 <table class="col-600" width="700" border="0" align="center">
                     <tbody>

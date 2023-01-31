@@ -1,30 +1,30 @@
     {{-- Tailwind CSS --}}
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
     {{-- Datatable --}}
-    <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/css/jquery.dataTables.min.css') }}">
     {{-- Toastr --}}
-    <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/toastr.min.css') }}" rel="stylesheet">
     {{-- Select2 --}}
-    <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/select2.min.css') }}" rel="stylesheet">
      {{-- Theme bootstrap 5 --}}
- <link rel="stylesheet" href="{{ asset('css/select2-bootstrap-5-theme.min.css') }}" />
+ <link rel="stylesheet" href="{{ asset('public/css/select2-bootstrap-5-theme.min.css') }}" />
     {{-- Grid--}}
-    <link href="{{ asset('css/grid.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/grid.css') }}" rel="stylesheet">
 
 
     {{-- leaflet --}}
-    <link rel="stylesheet" href="{{ asset('css/leaflet.css') }}" />
+    <link rel="stylesheet" href="{{ asset('public/css/leaflet.css') }}" />
     {{-- Datepicker --}}
-    <link  href="{{ asset('css/datepicker.min.css') }}" rel="stylesheet">
+    <link  href="{{ asset('public/css/datepicker.min.css') }}" rel="stylesheet">
     {{-- 1.53 JSGRID CSS --}}
-    <link  href="{{ asset('css/jsgrid.min.css') }}" rel="stylesheet">
-    <link  href="{{ asset('css/jsgrid-theme.min.css') }}" rel="stylesheet">
+    <link  href="{{ asset('public/css/jsgrid.min.css') }}" rel="stylesheet">
+    <link  href="{{ asset('public/css/jsgrid-theme.min.css') }}" rel="stylesheet">
     <!-- MarkerCluster -->
-    <link rel="stylesheet" href="{{ asset('/css/MarkerCluster.css') }}" />
-    <link rel="stylesheet" href="{{ asset('/css/MarkerCluster.Default.css') }}" />
+    <link rel="stylesheet" href="{{ asset('public/css/MarkerCluster.css') }}" />
+    <link rel="stylesheet" href="{{ asset('public/css/MarkerCluster.Default.css') }}" />
     <link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css" rel="stylesheet" />
     {{-- gridjs --}}
-    <link  href="{{ asset('css/mermaid.min.css') }}" rel="stylesheet">
+    <link  href="{{ asset('public/css/mermaid.min.css') }}" rel="stylesheet">
     {{-- flatpickr--}}
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
@@ -59,7 +59,7 @@
 
     .jsgrid-grid-body{
         border: none;
-        margin-bottom:0px; 
+        margin-bottom:0px;
     }
 
     .jsgrid-table{
@@ -67,7 +67,7 @@
                 font-size: .75rem;
                 line-height: 1rem;
                 padding: 0%;
-                margin-bottom:0px; 
+                margin-bottom:0px;
     },
     table.gridjs-table tr:nth-child(odd) td {
          background-color: rgb(241, 245, 249);

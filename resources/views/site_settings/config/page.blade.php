@@ -44,7 +44,7 @@
                                 {{ __('Site logo') }}
                             </label>
                             <img id="logo" name="logo" style="height: 100px;" class="mb-2 object-cover"
-                                @if (!$configs->logo) src="{{ asset('img/no_image.jpg') }}"
+                                @if (!$configs->logo) src="{{ asset('public/img/no_image.jpg') }}"
                                 @else
                                 src="{{ $configs->logo }}" @endif>
 
@@ -60,7 +60,7 @@
                                 {{ __('Site icon') }}
                             </label>
                             <img id="icon" name="icon" style="height: 32px;" class="mb-2"
-                                @if (!$configs->icon) src="{{ asset('img/no_image.jpg') }}"
+                                @if (!$configs->icon) src="{{ asset('public/img/no_image.jpg') }}"
                                 @else
                                 src="{{ $configs->icon }}" @endif>
                             <input type="file" id="icon_path" name="icon_path" onchange="showMyImage(this,'icon')"
@@ -75,7 +75,7 @@
                                 {{ __('Site background') }}
                             </label>
                             <img id="background" name="background" style="height: 100px;" class="mb-2"
-                                @if (!$configs->background) src="{{ asset('img/no_image.jpg') }}"
+                                @if (!$configs->background) src="{{ asset('public/img/no_image.jpg') }}"
                                 @else
                                 src=" {{ $configs->background }}" @endif>
                             <input type="file" id="background_path" name="background_path"
