@@ -30,10 +30,15 @@ Route::group(['middleware' => 'auth'], function () {
     })->name('pending_reviews');
     //Rutas para los banners sliders
     Route::resource('banner', 'App\Http\Controllers\BannerController');
-    // Ruta que redirige a la vista de banners
+    //Rutas para los productos con descuento
+    Route::resource('product-discount', 'App\Http\Controllers\ProductDiscountController');
     Route::get('banners', function () {
         return view('banners.sliders.index');
     })->name('banners.sliders.index');
+    // Ruta que redirige a la vista de productos con descuento
+    Route::get('products-discount', function () {
+        return view('products.products-discount.index');
+    })->name('products.discount.index');
     //Rutas para seo
     Route::resource('seo', 'App\Http\Controllers\SeoController');
     //Rutas para el faq
