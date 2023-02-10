@@ -58,11 +58,11 @@ class ConfigController extends Controller
                 //obtenemos el último parametro del array, que siempre va a ser el nombre de la imagen junto a su extensión
                 $file_name = end($extension);
 
-                //borramos la imagen del disco banners, donde se guardan todas las imagenes de los banners
+                //borramos la imagen del disco iconos, donde se guardan todas las imagenes de los iconos
                 Storage::disk('iconos')->delete($file_name);
                 // Lo guardamos
                 Storage::putFileAs('upload/iconos/', $logo, $logo_name);
-                // agrega al data el nombre del archivo
+                // agrega al data la ruta del archivo
                 $data['logo'] = env('APP_URL') . "/iconos/". $logo_name;
             }
             // ################## END LOGO ##################
@@ -80,11 +80,11 @@ class ConfigController extends Controller
                 //obtenemos el último parametro del array, que siempre va a ser el nombre de la imagen junto a su extensión
                 $file_name = end($extension);
 
-                //borramos la imagen del disco banners, donde se guardan todas las imagenes de los banners
+                //borramos la imagen del disco iconos, donde se guardan todas las imagenes de los iconos
                 Storage::disk('iconos')->delete($file_name);
                 // Lo guardamos
                 Storage::putFileAs('upload/iconos/', $icon, $icon_name);
-                // agrega al data el nombre del archivo
+                // agrega al data la ruta del archivo
                 $data['icon'] = env('APP_URL') . "/iconos/". $icon_name;
             }
             // ################## END ICONO ##################
@@ -105,11 +105,11 @@ class ConfigController extends Controller
                 //obtenemos el último parametro del array, que siempre va a ser el nombre de la imagen junto a su extensión
                 $file_name = end($extension);
 
-                //borramos la imagen del disco banners, donde se guardan todas las imagenes de los banners
+                //borramos la imagen del disco iconos, donde se guardan todas las imagenes de los iconos
                 Storage::disk('iconos')->delete($file_name);
                 // Lo guardamos
                 Storage::putFileAs('upload/iconos/', $background, $background_name);
-                // agrega al data el nombre del archivo
+                // agrega al data la ruta del archivo
                 $data['background'] = env('APP_URL') . "/iconos/". $background_name;
             }
             // ################## END BACKGROUND ##################
