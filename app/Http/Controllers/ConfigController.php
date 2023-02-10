@@ -33,8 +33,6 @@ class ConfigController extends Controller
             'name' => 'required',
         ]);
 
-        //dd($request->all());
-
         try {
             // Guardamos los datos a crear
             $data = ([
