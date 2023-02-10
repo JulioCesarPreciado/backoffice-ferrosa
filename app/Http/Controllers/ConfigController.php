@@ -46,71 +46,24 @@ class ConfigController extends Controller
             // // Obtenemos el archivo del request
             $logo = $request->file('logo_path');
 
+            $setting = Config::first();
+
             // Revisa si se modifico la imagen
             if (isset($logo)) {
-                // Creamos el nombre del archivo
-                $logo_name = date('YmdHi') . '_logo_' . $logo->getClientOriginalName();
-
-                // Obtengo el registro de la bd para obtener el logo anterior
-                $setting = Config::first();
-                //separamos la ruta por "/" para obtener el nombre de la imagen guardada
-                $extension = explode('/', $setting->logo);
-                //obtenemos el último parametro del array, que siempre va a ser el nombre de la imagen junto a su extensión
-                $file_name = end($extension);
-
-                //borramos la imagen del disco iconos, donde se guardan todas las imagenes de los iconos
-                Storage::disk('iconos')->delete($file_name);
-                // Lo guardamos
-                Storage::putFileAs('upload/iconos/', $logo, $logo_name);
-                // agrega al data la ruta del archivo
-                $data['logo'] = env('APP_URL') . "/iconos/". $logo_name;
+                $data['logo'] = $this->saveImage($logo, $setting->logo);
             }
-            // ################## END LOGO ##################
-            // ################## ICONO ##################
             // // Obtenemos el archivo del request
             $icon = $request->file('icon_path');
             // Revisa si se modifico la imagen
             if (isset($icon)) {
-                // Creamos el nombre del archivo
-                $icon_name = date('YmdHi') . '_icon_' . $icon->getClientOriginalName();
-                // Obtengo el registro de la bd para obtener el icono anterior
-                $setting = Config::first();
-                //separamos la ruta por "/" para obtener el nombre de la imagen guardada
-                $extension = explode('/', $setting->icon);
-                //obtenemos el último parametro del array, que siempre va a ser el nombre de la imagen junto a su extensión
-                $file_name = end($extension);
-
-                //borramos la imagen del disco iconos, donde se guardan todas las imagenes de los iconos
-                Storage::disk('iconos')->delete($file_name);
-                // Lo guardamos
-                Storage::putFileAs('upload/iconos/', $icon, $icon_name);
-                // agrega al data la ruta del archivo
-                $data['icon'] = env('APP_URL') . "/iconos/". $icon_name;
+                $data['icon'] = $this->saveImage($icon, $setting->icon);
             }
-            // ################## END ICONO ##################
-
-            // ################## BACKGROUND ##################
             // // Obtenemos el archivo del request
             $background = $request->file('background_path');
 
             // Revisa si se modifico la imagen
-            if (isset($background)) {
-                // Creamos el nombre del archivo
-                $background_name = date('YmdHi') . '_background_' . $background->getClientOriginalName();
-
-                // Obtengo el registro de la bd para obtener el background anterior
-                $setting = Config::first();
-                //separamos la ruta por "/" para obtener el nombre de la imagen guardada
-                $extension = explode('/', $setting->background);
-                //obtenemos el último parametro del array, que siempre va a ser el nombre de la imagen junto a su extensión
-                $file_name = end($extension);
-
-                //borramos la imagen del disco iconos, donde se guardan todas las imagenes de los iconos
-                Storage::disk('iconos')->delete($file_name);
-                // Lo guardamos
-                Storage::putFileAs('upload/iconos/', $background, $background_name);
-                // agrega al data la ruta del archivo
-                $data['background'] = env('APP_URL') . "/iconos/". $background_name;
+            if (isset($background)) {  
+                $data['background'] = $this->saveImage($background, $setting->background);
             }
             // ################## END BACKGROUND ##################
             //  ################## COLOR ##################
@@ -143,5 +96,22 @@ class ConfigController extends Controller
             // Retornamos a la vista
             return redirect()->route('configs.index')->with($notification);
         }
+    }
+
+    private function saveImage($image, $path) 
+    {
+        // Creamos el nombre del archivo
+        $new_image_name = date('YmdHi') . '_icon_' . $image->getClientOriginalName();
+        //separamos la ruta por "/" para obtener el nombre de la imagen guardada
+        $extension = explode('/', $path);
+        //obtenemos el último parametro del array, que siempre va a ser el nombre de la imagen junto a su extensión
+        $file_name = end($extension);
+
+        //borramos la imagen del disco iconos, donde se guardan todas las imagenes de los iconos
+        Storage::disk('iconos')->delete($file_name);
+        // Lo guardamos
+        Storage::putFileAs('upload/iconos/', $image, $new_image_name);
+        // agrega al data la ruta del archivo
+        return env('APP_URL') . "/iconos/". $new_image_name;
     }
 }
