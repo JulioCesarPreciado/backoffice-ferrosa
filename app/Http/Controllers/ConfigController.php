@@ -8,6 +8,7 @@ use App\Models\Contact;
 use Exception;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 
 class ConfigController extends Controller
@@ -32,6 +33,8 @@ class ConfigController extends Controller
             'name' => 'required',
         ]);
 
+        //dd($request->all());
+
         try {
             // Guardamos los datos a crear
             $data = ([
@@ -50,14 +53,17 @@ class ConfigController extends Controller
 
                 // Obtengo el registro de la bd para obtener el logo anterior
                 $setting = Config::first();
-                // Borramos la foto anterior
-                @unlink(public_path('storage/upload/site_setting/' . $setting->logo));
+                //separamos la ruta por "/" para obtener el nombre de la imagen guardada
+                $extension = explode('/', $setting->logo);
+                //obtenemos el último parametro del array, que siempre va a ser el nombre de la imagen junto a su extensión
+                $file_name = end($extension);
+
+                //borramos la imagen del disco banners, donde se guardan todas las imagenes de los banners
+                Storage::disk('iconos')->delete($file_name);
                 // Lo guardamos
-                $logo->move(public_path('storage/upload/site_setting'), $logo_name);
-                #Generamos el path donde se guardará
-                $logo_name = fullPath() . "/storage/upload/site_setting/" . $logo_name;
+                Storage::putFileAs('upload/iconos/', $logo, $logo_name);
                 // agrega al data el nombre del archivo
-                $data['logo'] = $logo_name;
+                $data['logo'] = env('APP_URL') . "/iconos/". $logo_name;
             }
             // ################## END LOGO ##################
             // ################## ICONO ##################
@@ -69,14 +75,17 @@ class ConfigController extends Controller
                 $icon_name = date('YmdHi') . '_icon_' . $icon->getClientOriginalName();
                 // Obtengo el registro de la bd para obtener el icono anterior
                 $setting = Config::first();
-                // Borramos la foto anterior
-                @unlink(public_path('storage/upload/site_setting/' . $setting->icon));
-                // Lo guardamos
-                $icon->move(public_path('storage/upload/site_setting'), $icon_name);
+                //separamos la ruta por "/" para obtener el nombre de la imagen guardada
+                $extension = explode('/', $setting->icon);
+                //obtenemos el último parametro del array, que siempre va a ser el nombre de la imagen junto a su extensión
+                $file_name = end($extension);
 
-                $icon_name = fullPath() . "/storage/upload/site_setting/" . $icon_name;
+                //borramos la imagen del disco banners, donde se guardan todas las imagenes de los banners
+                Storage::disk('iconos')->delete($file_name);
+                // Lo guardamos
+                Storage::putFileAs('upload/iconos/', $icon, $icon_name);
                 // agrega al data el nombre del archivo
-                $data['icon'] = $icon_name;
+                $data['icon'] = env('APP_URL') . "/iconos/". $icon_name;
             }
             // ################## END ICONO ##################
 
@@ -91,13 +100,17 @@ class ConfigController extends Controller
 
                 // Obtengo el registro de la bd para obtener el background anterior
                 $setting = Config::first();
-                // Borramos la foto anterior
-                @unlink(public_path('storage/upload/site_setting/' . $setting->background));
-                // Lo guardamos
-                $background->move(public_path('storage/upload/site_setting'), $background_name);
+                //separamos la ruta por "/" para obtener el nombre de la imagen guardada
+                $extension = explode('/', $setting->background);
+                //obtenemos el último parametro del array, que siempre va a ser el nombre de la imagen junto a su extensión
+                $file_name = end($extension);
 
+                //borramos la imagen del disco banners, donde se guardan todas las imagenes de los banners
+                Storage::disk('iconos')->delete($file_name);
+                // Lo guardamos
+                Storage::putFileAs('upload/iconos/', $background, $background_name);
                 // agrega al data el nombre del archivo
-                $data['background'] = fullPath() . "/storage/upload/site_setting/" . $background_name;
+                $data['background'] = env('APP_URL') . "/iconos/". $background_name;
             }
             // ################## END BACKGROUND ##################
             //  ################## COLOR ##################
