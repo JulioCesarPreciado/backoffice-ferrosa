@@ -139,5 +139,7 @@
     "Product discount created!": "Producto con descuento creado exitosamente!",
     "Discount price": "Precio con descuento",
     "Product price": "Precio del producto",
-    "Product discount updated!": "Producto con descuento actualizado exitosamente!"
+    "Product discount updated!": "Producto con descuento actualizado exitosamente!",
+    "Delete": "Eliminar",
+    "Show": "Mostrar"
 }
