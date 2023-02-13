@@ -140,17 +140,17 @@
                     </x-sidebar.list-item>
                     {{-- END Slider --}}
 
-                    {{-- START Slider --}}
+                    {{-- START banner discounts --}}
                        <x-sidebar.list-item title='Product discounts' icon='fa fa-images' :route='$route'
-                       href='banners.sliders.index'>
+                       href='banners.discounts.index'>
                    </x-sidebar.list-item>
-                   {{-- END Slider --}}
+                   {{-- END banner discounts --}}
 
-                      {{-- START Slider --}}
+                      {{-- START banner caracteristicas --}}
                       <x-sidebar.list-item title='Product feature' icon='fa fa-images' :route='$route'
                       href='banners.sliders.index'>
                   </x-sidebar.list-item>
-                  {{-- END Slider --}}
+                  {{-- END banner caracteristicas --}}
 
                 </x-slot>
             </x-sidebar.unordered-list>

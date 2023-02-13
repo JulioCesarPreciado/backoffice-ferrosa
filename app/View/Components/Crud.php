@@ -14,6 +14,7 @@ class Crud extends Component
     public $create;
     public $show;
     public $edit;
+    public $records;
 
     /**
      * Create a new component instance.
@@ -28,7 +29,8 @@ class Crud extends Component
         $item = null,
         $create = false,
         $show = false,
-        $edit = false
+        $edit = false,
+        $records = null,
     ) {
         $this->title = $title;
         $this->icon = $icon;
@@ -38,6 +40,7 @@ class Crud extends Component
         $this->create = $create;
         $this->show = $show;
         $this->edit = $edit;
+        $this->records = $records;
     }
 
     /**
@@ -47,6 +50,7 @@ class Crud extends Component
      */
     public function render()
     {
+
         return view('components.crud');
     }
 }

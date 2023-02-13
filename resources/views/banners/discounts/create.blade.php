@@ -9,14 +9,17 @@
 @endsection
 {{-- Contenido --}}
 @section('content')
+
     <x-crud
-        title="{{ __('Create')}} {{ __('Banner')}}"
-        icon="fas fa-images"
-        route='banner.store'
-        form='banners.sliders.form'
-        {{-- :item='' --}}
-        :create='true'
-        :show='false'
-        :edit='false'>
+    title="{{ __('Create')}} {{ __('Banner')}}"
+    icon="fas fa-images"
+    route='banner.store'
+    form='banners.discounts.form'
+    {{-- :item='' --}}
+    :create='true'
+    :show='false'
+    :edit='false'
+    :records="$records"
+    >
     </x-crud>
 @endsection

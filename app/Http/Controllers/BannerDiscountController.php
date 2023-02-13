@@ -9,13 +9,15 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
+use App\Models\ProductDiscount;
+
 class BannerDiscountController extends Controller
 {
 // Función que retorna todos los banners al index.
 public function index()
 {
     // Obtengo todos los registros de la BD ordenados por el más reciente.
-    $banners = Banner::orderBy('validity', 'asc')
+    $banners = Banner::where('type','=','descuentos')->orderBy('validity', 'asc')
         ->orderBy('updated_at', 'desc')
         ->get();
 
@@ -27,7 +29,8 @@ public function index()
 // Función que redirecciona a la vista create
 public function create()
 {
-    return view('banners.sliders.create');
+    $productos = ProductDiscount::where('status', '=', 'ACTIVO')->get();
+    return view('banners.discounts.create', ["records" => $productos]);
 }
 
 // Función que almacena el nuevo registro en la BD
@@ -37,7 +40,7 @@ public function store(Request $request)
     $request->validate([
         'title'     => 'required|string',
         'subtitle'  => 'nullable|string',
-        'thumbnail' => 'required|image',
+        'product_id' => 'required|image',
         'url'       => 'nullable|url',
         'validity'  => 'nullable|string',
     ]);
@@ -60,6 +63,7 @@ public function store(Request $request)
             'validity' => $request->validity ? 'ACTIVO' : 'INACTIVO',
             'id_user_created' => Auth::user()->id,
             'id_user_updated' => Auth::user()->id,
+            'type' => 'descuentos',
             'created_by' => Auth::user()->name,
             'updated_by' => Auth::user()->name,
             'created_at' => Carbon::now()->setTimezone('America/Mexico_City'),

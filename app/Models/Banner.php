@@ -9,4 +9,8 @@ class Banner extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function producto(){
+        return $this->belongsTo(Product::class, 'product_id', 'id');
+    }
 }

@@ -90,7 +90,9 @@
                         </div>
                         <div class="flex flex-wrap mt-6">
                             <div class="w-full md:w-1/2 px-4">
-                                <a href="{{ route('products.discount.index') }}" class="bg-blue-500 text-white active:bg-blue-500 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button">
+                                <a href="{{ route('products.discount.index') }}"
+                                    class="bg-blue-500 text-white active:bg-blue-500 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                                    type="button">
                                     {{ __('Return') }}
                                 </a>
                             </div>
