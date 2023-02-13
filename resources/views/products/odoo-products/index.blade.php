@@ -1,0 +1,42 @@
+@extends('layouts.app')
+{{-- Nombre en el title --}}
+@section('title')
+    {{ __('Update products') }}
+@endsection
+{{-- Nombre en el header --}}
+@section('header')
+    {{ __('Update products') }}
+@endsection
+{{-- Contenido --}}
+@section('content')
+<div class="w-full px-4">
+    <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-slate-100 border-0">
+        <div class="rounded-t bg-white mb-0 px-6 py-6">
+            <div class="text-center flex justify-between">
+                <h6 class="text-slate-700 text-xl font-bold">
+                    <div
+                    class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-blue-700">
+                    <i class="fas fa-download"></i>
+                </div>
+                    {{ __('Update products') }}
+                </h6>
+            </div>
+            <div class="flex justify-center flex-col items-center">
+                <img src="{{asset('img/product_import.svg')}}" class="shadow-lg rounded-lg" style="width:250px" alt="">
+                <div class="text-2xl text-gray-500 mt-4">Ponte al día con tus productos traidos desde odoo</div>
+            </div>
+            <div class="flex justify-center mt-6 mb-6">
+                <button id="button"
+                    class="bg-blue-500 text-white active:bg-green-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150 hover:bg-green-700"
+                    type="button" onclick="actualizarProductos()">
+                    {{ __('Update products') }}
+                </button>
+            </div>
+            <section id="errors"></section>
+        </div>
+    </div>
+</div>
+@endsection
+@push('js')
+    @include('products.odoo-products.scripts')
+@endpush
