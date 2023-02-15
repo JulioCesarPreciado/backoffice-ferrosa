@@ -60,6 +60,8 @@ Route::group(['middleware' => 'auth'], function () {
         return view('newsletters.index');
     })->name('newsletters.index');
 
+    //Ruta para actualizar productos en base a la api de odoo
+    Route::resource('odoo-products', 'App\Http\Controllers\OdooProductController');
     // Ruta para mandar el newsletter
     Route::get('/send_newsletter/{newsletter}', [App\Http\Controllers\NewsletterController::class, 'sendNewsletterEmail'])->name('newsletter.send');
 
