@@ -160,20 +160,18 @@
                 title='Products'
                 icon='fas fa-store-alt'
                 :route='$route'
-                :routes="['products.discount.index']">
+                :routes="['products.discount.index', 'odoo-products.index']">
                 {{-- Aquí se ponen los datos de los listitem que irian dentro del unordered-list --}}
                 <x-slot name="list_items">
-
-                    {{-- START Slider --}}
                     <x-sidebar.list-item title='Discounts' icon='fas fa-user-tag' :route='$route'
                         href='products.discount.index'>
                     </x-sidebar.list-item>
-                    {{-- END Slider --}}
-
+                    <x-sidebar.list-item title='Update products' icon='fas fa-download' :route='$route'
+                        href='odoo-products.index'>
+                    </x-sidebar.list-item>
                 </x-slot>
             </x-sidebar.unordered-list>
             {{-- END Products --}}
-
             {{-- START Emails --}}
             <x-sidebar.unordered-list
                 title='Emails'
@@ -182,7 +180,6 @@
                 :routes="['newsletters.index']">
                 {{-- Aquí se ponen los datos de los listitem que irian dentro del unordered-list --}}
                 <x-slot name="list_items">
-
                     {{-- START Newsletter --}}
                     <x-sidebar.list-item
                         title='Newsletter'
@@ -191,7 +188,6 @@
                         href='newsletters.index'>
                     </x-sidebar.list-item>
                     {{-- END Newsletter --}}
-
                 </x-slot>
             </x-sidebar.unordered-list>
             {{-- END Emails --}}
