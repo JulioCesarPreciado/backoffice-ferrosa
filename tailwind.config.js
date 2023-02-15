@@ -11,23 +11,23 @@ module.exports = {
         colors: {
             ...colors,
 
-                'bax-100': '#faf7f5',
-            
-                    'fhosting-blue': {
-                        50: '#98e2f3',
-                        100: '#83dcf1',
-                        200: '#6ed7ee',
-                        300: '#5ad1ec',
-                        400: '#45cbea',
-                        500: '#31c6e8',
-                        600: '#2cb2d0',
-                        700: '#279eb9',
-                        800: '#228aa2',
-                        900: '#1d768b',
-                        DEFAULT: '#31c6e8'
-                    },
-        
+            'bax-100': '#faf7f5',
+
+            'fhosting-blue': {
+                50: '#98e2f3',
+                100: '#83dcf1',
+                200: '#6ed7ee',
+                300: '#5ad1ec',
+                400: '#45cbea',
+                500: '#31c6e8',
+                600: '#2cb2d0',
+                700: '#279eb9',
+                800: '#228aa2',
+                900: '#1d768b',
+                DEFAULT: '#31c6e8'
             },
+
+        },
 
         extend: {
             backgroundImage: {

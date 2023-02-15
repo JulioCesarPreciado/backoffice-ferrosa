@@ -142,5 +142,9 @@
     "Product discount updated!": "Producto con descuento actualizado exitosamente!",
     "Delete": "Eliminar",
     "Show": "Mostrar",
-    "Update products": "Actualizar productos"
+    "Update products": "Actualizar productos",
+    "Update your products brought from odoo": "Actualiza tus productos traidos desde odoo",
+    "Updating products, please do not close the page.": "Actualizando productos, no cierre la página.",
+    "Updated products!": "Productos actualizados!",
+    "An error occurred, try again!": "Ocurrió un error, intente de nuevo!"
 }
