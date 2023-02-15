@@ -24,7 +24,7 @@ class BannerFactory extends Factory
             'thumbnail' => env('APP_URL') . "/" ."imagenes-banners/".generateImagesRandom(
                 $this->faker->word . $this->faker->word,
             ),
-            'type' => $this->faker->randomElement(['colecciones', 'descuentos']),
+            'type'=>$this->faker->randomElement(['colecciones', 'descuentos']),
             'created_by' => 'SEDDERS',
             'updated_by' => 'SEDDERS',
             'created_at' => Carbon::now()->setTimezone('America/Mexico_City'),

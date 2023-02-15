@@ -32,30 +32,26 @@
 
     <div class="w-full lg:w-12/12 px-4 mb-4">
         {{-- START input thumbnail --}}
-        <x-input.image
-            id='thumbnail'
-            name='thumbnail'
-            title='Thumbnail'
-            :value='($create)?null:$item->thumbnail'
-            :required=true
-            :create='$create'
-            :show='$show'
-            :edit='$edit'>
-        </x-input.image>
+        <div
+        class="flex flex-wrap items-center border-none border-teal-500 w-full  md:w-32-6per pt-5 md:pt-0">
+        <label for="product_id" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+            {{ __('Product') }}</label>
+        <select name="product_id" id="product_id" class="producto-select w-full" required>
+            @foreach ($records as $discount_product)
+            @if($edit && $item->producto->id == $discount_product->id)
+            <option title="{{ $discount_product->thumbnail }}" value="{{ $discount_product->id }}"
+                {{ collect(old('product_id'))->contains($discount_product->id) ? 'selected' : '' }} selected>
+                {{ $discount_product->name }}</option>
+        @else
+            <option title="{{ $discount_product->producto->thumbnail  }}" value="{{ $discount_product->id }}"
+                {{ collect(old('product_id'))->contains($discount_product->id) ? 'selected' : '' }}>
+                {{ $discount_product->producto->name }}</option>
+        @endif
+            @endforeach
+        </select>
+    </div>
         {{-- END input thumbnail --}}
     </div>
-    <div class="w-full px-4">
-    <x-input.number
-            id='percentaje'
-            name='percentaje'
-            title='percentaje'
-            :value='$create ? null : $item->percentaje'
-            :required=false
-            :create='$create'
-            :show='$show'
-            :edit='$edit'>
-    </x-input.number>
-</div>
 
     <div class="w-full px-4">
         <div class="relative w-full mb-3">
@@ -162,7 +158,7 @@
             color="blue-500"
             id="button_return"
             name="button_return"
-            href="{{ route('banners', 'descuentos') }}"
+            href="{{ route('banners.sliders.index') }}"
             >
         </x-button-link>
         {{-- END button return --}}

@@ -1,20 +1,20 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Input;
 
 use Illuminate\View\Component;
 
-class Crud extends Component
+class Number extends Component
 {
+    public $id;
+    public $name;
     public $title;
-    public $icon;
-    public $route;
-    public $form;
-    public $item;
+    public $value;
+    public $required;
+    public $readonly;
     public $create;
     public $show;
     public $edit;
-    public $records;
 
     /**
      * Create a new component instance.
@@ -22,25 +22,25 @@ class Crud extends Component
      * @return void
      */
     public function __construct(
-        $title = 'A text input',
-        $icon = 'fas fa-smile-beam',
-        $route = null,
-        $form = null,
-        $item = null,
+        $id = 'number_input',
+        $name = 'number_input',
+        $title = 'A number input',
+        $value = 'A number value',
+        $required = false,
+        $readonly = false,
         $create = false,
         $show = false,
-        $edit = false,
-        $records = null,
+        $edit = false
     ) {
+        $this->id = $id;
+        $this->name = $name;
         $this->title = $title;
-        $this->icon = $icon;
-        $this->route = $route;
-        $this->form = $form;
-        $this->item = $item;
+        $this->value = $value;
+        $this->required = $required;
+        $this->readonly = $readonly;
         $this->create = $create;
         $this->show = $show;
         $this->edit = $edit;
-        $this->records = $records;
     }
 
     /**
@@ -50,7 +50,6 @@ class Crud extends Component
      */
     public function render()
     {
-
-        return view('components.crud');
+        return view('components.input.number');
     }
 }

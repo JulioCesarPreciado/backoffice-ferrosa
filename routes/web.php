@@ -27,6 +27,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/pending-reviews', function () {
         return view('pending_reviews.index');
     })->name('pending_reviews');
+    //Rutas para los productos con descuento
+    Route::resource('product-discount', 'App\Http\Controllers\ProductDiscountController');
     //Rutas para los banners sliders
     Route::resource('banner', 'App\Http\Controllers\BannerColeccionesController');
     // Ruta que redirige a la vista de banners
@@ -34,6 +36,19 @@ Route::group(['middleware' => 'auth'], function () {
         return view('banners.colecciones.index');
     })->name('banners');
     Route::get('/banners/{type}', [App\Http\Controllers\BannerColeccionesController::class, 'getVistaBanner'])->name('banners');
+    Route::resource('banner', 'App\Http\Controllers\BannerController');
+    Route::get('banners', function () {
+        return view('banners.sliders.index');
+    })->name('banners.sliders.index');
+    //Rutas para los banners discounts
+    Route::resource('banner_discount', 'App\Http\Controllers\BannerDiscountController');
+    Route::get('discount_banner', function () {
+        return view('banners.discounts.index');
+    })->name('banners.discounts.index');
+    // Ruta que redirige a la vista de productos con descuento
+    Route::get('products-discount', function () {
+        return view('products.products-discount.index');
+    })->name('products.discount.index');
     //Rutas para seo
     Route::resource('seo', 'App\Http\Controllers\SeoController');
     //Rutas para el faq

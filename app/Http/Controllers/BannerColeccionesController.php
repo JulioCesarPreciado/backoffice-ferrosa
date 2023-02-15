@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Banner;
 use Carbon\Carbon;
@@ -63,13 +64,14 @@ class BannerColeccionesController extends Controller
 
             //guarda la imagen en el disco banners
             $file->store('/', 'banners');
-
             // Preparo los datos a agregar
             $data = [
                 'title' => $request->title,
                 'subtitle' => $request->subtitle,
                 'thumbnail' => env('APP_URL') . "/imagenes-banners/" . $file->hashName(),
                 'url' => $request->url,
+                'type' => 'colecciones',
+                'percentaje' => ($request->percentaje <=0) ? null :$request->percentaje ,
                 'status' => $request->validity ? 'ACTIVO' : 'INACTIVO',
                 'validity' => $request->validity ? 'ACTIVO' : 'INACTIVO',
                 'id_user_created' => Auth::user()->id,
@@ -151,6 +153,8 @@ class BannerColeccionesController extends Controller
                 'status' => $request->validity ? 'ACTIVO' : 'INACTIVO',
                 'validity' => $request->validity ? 'ACTIVO' : 'INACTIVO',
                 'id_user_updated' => Auth::user()->id,
+                'type' => 'colecciones',
+                'percentaje' => ($request->percentaje <=0) ? null :$request->percentaje,
                 'updated_at' => Carbon::now()->setTimezone('America/Mexico_City'),
                 'updated_by' => Auth::user()->name
             ];
