@@ -13,7 +13,7 @@
     <x-crud
     title="{{ __('Create')}} {{ __('Banner')}}"
     icon="fas fa-images"
-    route='banner.store'
+    route='banner_discount.store'
     form='banners.discounts.form'
     {{-- :item='' --}}
     :create='true'

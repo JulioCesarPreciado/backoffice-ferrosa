@@ -12,11 +12,13 @@
     <x-crud
         title="{{ __('Edit')}} {{ __('Banner')}}"
         icon="fas fa-images"
-        route='banner.update'
-        form='banners.sliders.form'
-        :item='$banner'
+        route='banner_discount.update'
+        form='banners.discounts.form'
+        :item='$banner_discount'
         :create='false'
         :show='false'
-        :edit='true'>
+        :edit='true'
+        :records="$records"
+        >
     </x-crud>
 @endsection

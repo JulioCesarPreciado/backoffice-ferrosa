@@ -21,6 +21,17 @@ public function index()
         ->orderBy('updated_at', 'desc')
         ->get();
 
+    $banners = $banners->map(function($banner) {
+        return[
+            'id'            => $banner->id,
+            'thumbnail'     => $banner->producto->thumbnail,
+            'title'         => $banner->title,
+            'status'        => $banner->status,
+            'updated_at'    => $banner->updated_at,
+            'validity'      => $banner->validity,
+        ];
+    });
+
     return Response::json([
         'banners' => $banners
     ]);
@@ -40,30 +51,26 @@ public function store(Request $request)
     $request->validate([
         'title'     => 'required|string',
         'subtitle'  => 'nullable|string',
-        'product_id' => 'required|image',
+        'product_id' => 'required',
         'url'       => 'nullable|url',
         'validity'  => 'nullable|string',
     ]);
 
     try {
-        // ### START Guardar imagen ###
-        // Obtenemos el archivo del request
-        $file = $request->file('thumbnail');
 
-        //guarda la imagen en el disco banners
-        $file->store('/', 'banners');
-
-        // Preparo los datos a agregar
+        $product = ProductDiscount::find($request->product_id);
+        
         $data = [
             'title' => $request->title,
             'subtitle' => $request->subtitle,
-            'thumbnail' => env('APP_URL') . "/imagenes-banners/". $file->hashName(),
+            'thumbnail' => "hola",
             'url' => $request->url,
             'status' => $request->validity ? 'ACTIVO' : 'INACTIVO',
             'validity' => $request->validity ? 'ACTIVO' : 'INACTIVO',
             'id_user_created' => Auth::user()->id,
             'id_user_updated' => Auth::user()->id,
             'type' => 'descuentos',
+            'product_id'    => $request->product_id,
             'created_by' => Auth::user()->name,
             'updated_by' => Auth::user()->name,
             'created_at' => Carbon::now()->setTimezone('America/Mexico_City'),
@@ -79,7 +86,7 @@ public function store(Request $request)
             'alert-type' => 'success'
         );
         // Retorna a la vista
-        return redirect()->route('banners.sliders.index')->with($notification);
+        return redirect()->route('banners.discounts.index')->with($notification);
     } catch (QueryException $e) {
         // Alerta de error
         $notification = array(
@@ -92,15 +99,17 @@ public function store(Request $request)
 }
 
 // Función que manda a la vista show
-public function show(Banner $banner)
+public function show(Banner $banner_discount)
 {
-    return view('banners.sliders.show', compact('banner'));
+    $records = ProductDiscount::where('status', '=', 'ACTIVO')->get();
+    return view('banners.discounts.show', compact('banner_discount', 'records'));
 }
 
 // Función que manda a la vista edit
-public function edit(Banner $banner)
+public function edit(Banner $banner_discount)
 {
-    return view('banners.sliders.edit', compact('banner'));
+    $records = ProductDiscount::where('status', '=', 'ACTIVO')->get();
+    return view('banners.discounts.edit', compact('banner_discount', 'records'));
 }
 
 // Función que actualiza el registro en la BD
@@ -178,7 +187,7 @@ public function update(Request $request, Banner $banner)
 }
 
 // Función que elimina el registro de la BD
-public function destroy(Banner $banner)
+public function destroy(Banner $banner_discount)
 {
     try {
         // Prepara los datos a actualizar

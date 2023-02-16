@@ -33,7 +33,7 @@
                     srcStr = row.cells[1].data;
 
                     var img = h('img', {
-                        src: srcStr,
+                        src: "data:image/png;base64," +srcStr,
                         className: 'm-2 object-cover',
                         style: 'height: 77px;'
                     }, '');
