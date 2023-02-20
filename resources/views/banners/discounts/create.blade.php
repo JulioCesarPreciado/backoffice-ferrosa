@@ -29,7 +29,7 @@
 
         if(products_discount.length === 0){
             Swal.fire({
-            title: "{{ __('You don't have discounted products, do you want to add one?') }}",
+            title: `{{ __("You don't have discounted products, do you want to add one?") }}`,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
