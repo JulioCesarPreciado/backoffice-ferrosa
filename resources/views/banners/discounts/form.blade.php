@@ -24,20 +24,24 @@
             @if($show)
             <input id="product_id" name="product_id" type="text" value="{{$item->producto->name}}" class="disabled:opacity-50 border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" disabled/>
             @else
-            <select name="product_id" id="product_id" class="producto-select w-full" required>
-                @foreach ($records as $discount_product)
-                    @if ($edit && $item->product_id == $discount_product->product_id)
-                        <option value="{{ $discount_product->product_id }}"
-                            {{ collect(old('product_id'))->contains($discount_product->product_id) ? 'selected' : '' }}
-                            selected>
-                            {{ $discount_product->producto->name }}</option>
-                    @else
-                        <option value="{{ $discount_product->id }}"
-                            {{ collect(old('product_id'))->contains($discount_product->product_id) ? 'selected' : '' }}>
-                            {{ $discount_product->producto->name }}</option>
-                    @endif
-                @endforeach
-            </select>
+                @if(count($records) > 0)
+                    <select name="product_id" id="product_id" class="producto-select w-full" required>
+                        @foreach ($records as $discount_product)
+                            @if ($edit && $item->product_id == $discount_product->product_id)
+                                <option value="{{ $discount_product->product_id }}"
+                                    {{ collect(old('product_id'))->contains($discount_product->product_id) ? 'selected' : '' }}
+                                    selected>
+                                    {{ $discount_product->producto->name }}</option>
+                            @else
+                                <option value="{{ $discount_product->product_id }}"
+                                    {{ collect(old('product_id'))->contains($discount_product->product_id) ? 'selected' : '' }}>
+                                    {{ $discount_product->producto->name }}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                @else
+                    <p class="w-full">No hay productos con categorias, quieres agregar uno?</p>
+                @endif
             @endif
         </div>
         {{-- END input thumbnail --}}
