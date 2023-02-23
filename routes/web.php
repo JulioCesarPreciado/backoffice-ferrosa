@@ -29,6 +29,8 @@ Route::group(['middleware' => 'auth'], function () {
         return view('pending_reviews.index');
     })->name('pending_reviews');
     //Rutas para los productos con descuento
+    Route::get('product-discount/products', [App\Http\Controllers\ProductDiscountController::class, 'searchProducts'])->name('products.search');
+    Route::get('product-discount/price', [App\Http\Controllers\ProductDiscountController::class, 'getProduct'])->name('products.price');
     Route::resource('product-discount', 'App\Http\Controllers\ProductDiscountController');
     //Rutas para los banners sliders
     Route::resource('banner', 'App\Http\Controllers\BannerController');

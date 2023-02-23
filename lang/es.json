@@ -146,5 +146,7 @@
     "Update your products brought from odoo": "Actualiza tus productos traidos desde odoo",
     "Updating products, please do not close the page.": "Actualizando productos, no cierre la página.",
     "Updated products!": "Productos actualizados!",
-    "An error occurred, try again!": "Ocurrió un error, intente de nuevo!"
+    "An error occurred, try again!": "Ocurrió un error, intente de nuevo!",
+    "Product was not found": "No se encontró el producto",
+    "You must write at least 2 characters": "Debes escribir al menos 2 carácteres"
 }
