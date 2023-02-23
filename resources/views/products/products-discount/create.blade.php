@@ -34,11 +34,6 @@
                             <label for="product_id" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                                 {{ __('Product') }}</label>
                             <select name="product_id" id="product_id" class="producto-select w-full" required>
-                                @foreach ($productos as $producto)
-                                    <option title="{{ $producto->thumbnail }}" value="{{ $producto->id }}"
-                                        {{ collect(old('product_id'))->contains($producto->id) ? 'selected' : '' }}>
-                                        {{ $producto->name }}</option>
-                                @endforeach
                             </select>
                         </div>
                         <div
@@ -113,17 +108,21 @@
 @push('js')
     <script>
         $(document).ready(function() {
-
-            var products = {!! $productos->toJson() !!};
             var product_price = null
+            //si ocurrió un error cargo el select2 con el producto que tenía escogido
+            @if(old('product_id'))
+                let id = "{{old('product_id')}}"
+                getProduct(id)
+            @endif
 
             function formatState(state) {
+                if (state.loading) return '<span class="text-sm text-gray-500 p-2 ml-2">{{__("Loading...")}}</span>';
                 if (!state.id) {
                     return state.text;
                 }
                 var $state = $(
                     '<div class="flex justify-around items-center"><img src="data:image/png;base64,' + state
-                    .title +
+                    .thumbnail +
                     '" class="m-2 object-cover rounded-full shadow-lg" style="height: 77px; width:77px;" /><span class="ml-4">' +
                     state.text + '</span></div>'
                 );
@@ -134,17 +133,24 @@
                 templateResult: formatState,
                 "language": {
                     "noResults": function() {
-                        return "No se encontró el producto";
+                        return "{{ __('Product was not found') }}";
+                    },
+                    "inputTooShort": function() {
+                        return "{{ __('You must write at least 2 characters') }}";
                     }
                 },
                 escapeMarkup: function(markup) {
                     return markup;
-                }
-            });
-
-            //setea los valores por primera vez
-            $('#product_price').val(`$ ${$("#product_id option:selected").val()}`)
-            product_price = $("#product_id option:selected").val()
+                },
+                minimumInputLength: 2,
+                ajax: {
+                    url: '{{ route('products.search') }}',
+                    dataType: "json",
+                    type: 'GET',
+                    delay: 250,
+                },
+                cache: true
+            });            
 
             /* Recuperando la instancia de flatpickr */
             flatpickr("#discount_start_date", {
@@ -185,22 +191,40 @@
                     $('#validar').addClass('cursor-not-allowed')
                 }
             }
-
-
+            //cada que cambia el select ejecuto la función getProduct para que me traiga información del producto
             $("#product_id").change(function() {
-                var product = products.find(element => element.id == $("#product_id option:selected").val())
-                product_price = product.price
-                $('#product_price').val(`$ ${product.price}`)
-
-                if ($('#percentage').val() != "" && $('#percentage').val() > 0 && $('#percentage').val() <
-                    100) {
-                    var discount = (product_price * ($('#percentage').val() / 100))
-                    discount = Math.round(discount * 100) / 100
-                    var r = product_price - discount
-                    r = Math.round(r * 100) / 100
-                    $('#discount').val(r)
-                }
+                getProduct($("#product_id option:selected").val())
             });
+
+            function getProduct(id){
+                var url = "{{ route('products.price', ['product_id' => 'value']) }}";
+                url = url.replace('value', id);
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    data: {
+                        "_token": $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    success: function(data) {
+                        //sí falló la validación cargo en el select el producto escogido
+                        @if(old('product_id'))
+                            $("#product_id").append(`<option id="${data.id}">${data.name}</option>`);
+                        @endif
+                        product_price = data.price
+                        $('#product_price').val(`$ ${data.price}`)
+                        if ($('#percentage').val() != "" && $('#percentage').val() > 0 && $('#percentage').val() < 100) {
+                            var discount = (product_price * ($('#percentage').val() / 100))
+                            discount = Math.round(discount * 100) / 100
+                            var r = product_price - discount
+                            r = Math.round(r * 100) / 100
+                            $('#discount').val(r)
+                        }
+                    },
+                    error: function(data) {
+                        toastr.error(data);
+                    }
+                });
+            }
 
         });
     </script>

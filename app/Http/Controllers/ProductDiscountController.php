@@ -38,12 +38,7 @@ class ProductDiscountController extends Controller
     // Función que redirecciona a la vista create
     public function create()
     {
-
-        $productos = Product::Select('id', 'name', 'price', 'thumbnail')->where('validity', '=', 'ACTIVO')->get();
-
-        return view('products.products-discount.create', [
-            "productos" => $productos
-        ]);
+        return view('products.products-discount.create');
     }
 
     public function store(Request $request)
@@ -96,9 +91,7 @@ class ProductDiscountController extends Controller
     // Función que manda a la vista edit
     public function edit(ProductDiscount $product_discount)
     {
-        $productos = Product::Select('id', 'name', 'price', 'thumbnail')->where('validity', '=', 'ACTIVO')->get();
-
-        return view('products.products-discount.edit', compact('product_discount', 'productos'));
+        return view('products.products-discount.edit', compact('product_discount'));
     }
 
     // Función que actualiza el registro en la BD
@@ -172,5 +165,18 @@ class ProductDiscountController extends Controller
         } catch (QueryException $e) {
             return $e->errorInfo[2];
         }
+    }
+
+    public function searchProducts(Request $request)
+    {
+        $products = Product::where('name', 'LIKE', '%'.$request->input('term', '').'%')
+        ->get(['id', 'name as text', 'thumbnail']);
+        return ['results' => $products];
+    }
+
+    public function getProduct(Request $request)
+    {
+        $product = Product::where('id',$request->input('product_id'))->first(['price', 'name', 'id']);
+        return $product;
     }
 }
