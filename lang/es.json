@@ -148,5 +148,9 @@
     "Updated products!": "Productos actualizados!",
     "An error occurred, try again!": "Ocurrió un error, intente de nuevo!",
     "Product was not found": "No se encontró el producto",
-    "You must write at least 2 characters": "Debes escribir al menos 2 carácteres"
+    "You must write at least 2 characters": "Debes escribir al menos 2 carácteres",
+    "banner_discount": "Banner de descuento",
+    "Discounts Banner": "Banners de descuento",
+    "You don't have discounted products, do you want to add one?": "No tiene productos con descuento, quiere agregar uno?",
+    "Yes, I want to add one!": "Sí, quiero agregar uno!"
 }
