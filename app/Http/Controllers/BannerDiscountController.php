@@ -21,6 +21,17 @@ public function index()
         ->orderBy('updated_at', 'desc')
         ->get();
 
+    $banners = $banners->map(function($banner) {
+        return[
+            'id'            => $banner->id,
+            'thumbnail'     => $banner->producto->thumbnail,
+            'title'         => $banner->title,
+            'status'        => $banner->status,
+            'updated_at'    => $banner->updated_at,
+            'validity'      => $banner->validity,
+        ];
+    });
+
     return Response::json([
         'banners' => $banners
     ]);
@@ -29,7 +40,15 @@ public function index()
 // Función que redirecciona a la vista create
 public function create()
 {
-    $productos = ProductDiscount::where('status', '=', 'ACTIVO')->get();
+
+    $products_in_banners = Banner::where('type', 'descuentos')->where('status', 'ACTIVO')->pluck('product_id')->toArray();
+
+    $products_ids = array_flip($products_in_banners);
+    $products_ids = array_flip($products_ids);
+    $products_ids = array_values($products_ids);
+
+    $productos = ProductDiscount::where('status', '=', 'ACTIVO')->whereNotIn('product_id', $products_ids)->get();
+
     return view('banners.discounts.create', ["records" => $productos]);
 }
 
@@ -40,38 +59,25 @@ public function store(Request $request)
     $request->validate([
         'title'     => 'required|string',
         'subtitle'  => 'nullable|string',
-        'product_id' => 'required|image',
+        'product_id' => 'required|unique:banners,product_id|exists:products,id',
         'url'       => 'nullable|url',
         'validity'  => 'nullable|string',
     ]);
 
     try {
-        // ### START Guardar imagen ###
-        // Obtenemos el archivo del request
-        $file = $request->file('thumbnail');
 
-        //guarda la imagen en el disco banners
-        $file->store('/', 'banners');
-
-        // Preparo los datos a agregar
         $data = [
-            'title' => $request->title,
-            'subtitle' => $request->subtitle,
-            'thumbnail' => env('APP_URL') . "/imagenes-banners/". $file->hashName(),
-            'url' => $request->url,
-            'status' => $request->validity ? 'ACTIVO' : 'INACTIVO',
-            'validity' => $request->validity ? 'ACTIVO' : 'INACTIVO',
-            'id_user_created' => Auth::user()->id,
-            'id_user_updated' => Auth::user()->id,
-            'type' => 'descuentos',
-            'created_by' => Auth::user()->name,
-            'updated_by' => Auth::user()->name,
-            'created_at' => Carbon::now()->setTimezone('America/Mexico_City'),
-            'updated_at' => Carbon::now()->setTimezone('America/Mexico_City')
+            'title'     => $request->title,
+            'subtitle'  => $request->subtitle,
+            'thumbnail' => "banner descuentos",
+            'url'       => $request->url,
+            'status'    => $request->validity ? 'ACTIVO' : 'INACTIVO',
+            'validity'  => $request->validity ? 'ACTIVO' : 'INACTIVO',
+            'type'      => 'descuentos',
+            'product_id'=> $request->product_id
         ];
 
-        // Inserta el nuevo registro a la BD y obtengo su ID
-        $banner = Banner::create($data)->id;
+        $banner = Banner::createWithAll($data);
 
         // Alerta de exito
         $notification = array(
@@ -79,7 +85,7 @@ public function store(Request $request)
             'alert-type' => 'success'
         );
         // Retorna a la vista
-        return redirect()->route('banners.sliders.index')->with($notification);
+        return redirect()->route('banners.discounts.index')->with($notification);
     } catch (QueryException $e) {
         // Alerta de error
         $notification = array(
@@ -92,19 +98,31 @@ public function store(Request $request)
 }
 
 // Función que manda a la vista show
-public function show(Banner $banner)
+public function show(Banner $banner_discount)
 {
-    return view('banners.sliders.show', compact('banner'));
+    $records = ProductDiscount::where('status', '=', 'ACTIVO')->get();
+    return view('banners.discounts.show', compact('banner_discount', 'records'));
 }
 
 // Función que manda a la vista edit
-public function edit(Banner $banner)
+public function edit(Banner $banner_discount)
 {
-    return view('banners.sliders.edit', compact('banner'));
+    $products_in_banners = Banner::where('type', 'descuentos')->where('status', 'ACTIVO')->pluck('product_id')->toArray();
+
+    $products_ids = array_flip($products_in_banners);
+    $products_ids = array_flip($products_ids);
+    $products_ids = array_values($products_ids);
+
+    $products_ids = array_filter($products_ids, function($item) use($banner_discount) {
+        return $item != $banner_discount->product_id;
+    });
+
+    $records = ProductDiscount::where('status', '=', 'ACTIVO')->whereNotIn('product_id', $products_ids)->get();
+    return view('banners.discounts.edit', compact('banner_discount', 'records'));
 }
 
 // Función que actualiza el registro en la BD
-public function update(Request $request, Banner $banner)
+public function update(Request $request, Banner $banner_discount)
 {
     // Validación de los campos recibidos
     $request->validate([
@@ -112,52 +130,27 @@ public function update(Request $request, Banner $banner)
         'subtitle'  => 'nullable|string',
         'thumbnail' => 'nullable|image',
         'url'       => 'nullable|url',
+        'product_id'=> 'required|unique:banners,product_id,' .$banner_discount->id,
         'validity'  => 'nullable|string',
     ]);
-
+    
     try {
-        // ### START Guardar imagen ###
-        // Obtenemos el archivo del request
-        $file = $request->file('thumbnail');
-
-        $thumbnail = "";
-        #Revisa si se modifico la imagen y pone la nueva, si no deja la que estaba
-        if (isset($file)) {
-
-            //separamos la ruta por "/" para obtener el nombre de la imagen guardada
-            $extension = explode('/', $banner->thumbnail);
-            //obtenemos el último parametro del array, que siempre va a ser el nombre de la imagen junto a su extensión
-            $file_name = end($extension);
-
-            //borramos la imagen del disco banners, donde se guardan todas las imagenes de los banners
-            Storage::disk('banners')->delete($file_name);
-
-            //guarda la nueva imagen en el disco banners
-            $file->store('/', 'banners');
-
-            //creo la nueva url para la imagen
-            $thumbnail = env('APP_URL') . "/imagenes-banners/". $file->hashName();
-
-        } else {
-            $thumbnail = $banner->thumbnail;
-        }
-        // ### END Guardar imagen ###
-
+        
         // Preparo los datos a actualizar
         $data = [
-            'title' => $request->title,
-            'subtitle' => $request->subtitle,
-            'thumbnail' => $thumbnail,
-            'url' => $request->url,
-            'status' => $request->validity ? 'ACTIVO' : 'INACTIVO',
-            'validity' => $request->validity ? 'ACTIVO' : 'INACTIVO',
-            'id_user_updated' => Auth::user()->id,
-            'updated_at' => Carbon::now()->setTimezone('America/Mexico_City'),
-            'updated_by' => Auth::user()->name
+            'title'             => $request->title,
+            'subtitle'          => $request->subtitle,
+            'url'               => $request->url,
+            'status'            => $request->validity ? 'ACTIVO' : 'INACTIVO',
+            'validity'          => $request->validity ? 'ACTIVO' : 'INACTIVO',
+            'product_id'        => $request->product_id,
+            'id_user_updated'   => Auth::user()->id,
+            'updated_at'        => Carbon::now()->setTimezone('America/Mexico_City'),
+            'updated_by'        => Auth::user()->name
         ];
 
         // Actualiza el registro en la BD
-        $banner->update($data);
+        $banner_discount->update($data);
 
         // Alerta de exito
         $notification = array(
@@ -165,7 +158,7 @@ public function update(Request $request, Banner $banner)
             'alert-type' => 'success'
         );
         // Retorna a la vista
-        return redirect()->route('banners.sliders.index')->with($notification);
+        return redirect()->route('banners.discounts.index')->with($notification);
     } catch (QueryException $e) {
         // Alerta de error
         $notification = array(
@@ -178,19 +171,10 @@ public function update(Request $request, Banner $banner)
 }
 
 // Función que elimina el registro de la BD
-public function destroy(Banner $banner)
+public function destroy(Banner $banner_discount)
 {
     try {
-        // Prepara los datos a actualizar
-        $data = [
-            'status' => 'INACTIVO',
-            'validity' => 'INACTIVO',
-            'id_user_updated' => Auth::user()->id,
-            'updated_by' => Auth::user()->name,
-            'updated_at' => Carbon::now()->setTimezone('America/Mexico_City')
-        ];
-        // Actualiza el registro a borrado.
-        $banner->update($data);
+        $banner_discount->delete();
         return __('Record disabled!');
     } catch (QueryException $e) {
         return $e->errorInfo[2];
