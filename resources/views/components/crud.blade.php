@@ -26,6 +26,7 @@
                     'edit' => $edit,
                     'show' => $show,
                     'create' => $create,
+                    'records' =>$records
                 ])
                 </form>
             </div>

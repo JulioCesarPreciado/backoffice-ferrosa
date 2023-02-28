@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\Product;
 use Exception;
-use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Response;
 use Ripcord\Ripcord;
 
 // Más información sobre service pattern
@@ -204,9 +204,17 @@ class OdooClientService extends BaseClientService
             }
         } catch (Exception $e) {
             // Si ocurre algún error
-            return $e->getMessage();
+            return Response::json(array(
+                "mensaje"   => $e->getMessage(),
+                "status"    => 500
+            ), 500);
         }
-        return "Se crearón " . $products_created . " productos";
+
+        return Response::json(array(
+            "mensaje"   => "Se crearon " . $products_created . " productos",
+            "status"    => 200
+        ), 200);
+
     }
 
 

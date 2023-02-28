@@ -1,8 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-.grid{
+
+.grid {
     display: grid;
     grid-template-columns: 50% 50%;
 }
-/* agegar el grid a responsive desing */
