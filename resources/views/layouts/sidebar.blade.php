@@ -150,7 +150,7 @@
 
                     {{-- START banner caracteristicas --}}
                     <x-sidebar.list-item title='Product feature' icon='fa fa-images' :route='$route'
-                        href='banners.sliders.index'>
+                        href='banners.characteristics.index'>
                     </x-sidebar.list-item>
                     {{-- END banner caracteristicas --}}
 
