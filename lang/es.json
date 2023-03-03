@@ -152,5 +152,10 @@
     "banner_discount": "Banner de descuento",
     "Discounts Banner": "Banners de descuento",
     "You don't have discounted products, do you want to add one?": "No tiene productos con descuento, quiere agregar uno?",
-    "Yes, I want to add one!": "Sí, quiero agregar uno!"
+    "Yes, I want to add one!": "Sí, quiero agregar uno!",
+    "Hi 👋 Welcome To ": "Hola 👋 bienvenido a",
+    "Sign In":"Iniciar sesión",
+    "Please sign in to your account":"Inicie sesión en su cuenta",
+    "login in":"iniciar sesión",
+    "Enter your password":"Ingresa tu contraseña"
 }
