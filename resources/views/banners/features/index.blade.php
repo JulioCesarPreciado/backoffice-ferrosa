@@ -1,19 +1,19 @@
 @extends('layouts.app')
 {{-- Nombre en el title --}}
 @section('title')
-    {{ __('Discounts Banner') }}
+    {{ __('Featured Product Banners') }}
 @endsection
 {{-- Nombre en el header --}}
 @section('header')
-    {{ __('Discounts Banner') }}
+    {{ __('Featured Product Banners') }}
 @endsection
 {{-- Contenido --}}
 @section('content')
     <x-table.grid-js
-        title="{{ __('Discounts Banner') }}"
+        title="{{ __('Featured Product Banners') }}"
         icon="fas fa-images"
-        url="banner_discount"
-        parameter="banner_discount"
+        url="banner_featured"
+        parameter="banner_featured"
         :create="true"
         :show="true"
         :edit="true"

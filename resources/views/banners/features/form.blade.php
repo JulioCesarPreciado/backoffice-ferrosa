@@ -26,21 +26,21 @@
             @else
                 @if(count($records) > 0)
                     <select name="product_id" id="product_id" class="producto-select w-full" required>
-                        @foreach ($records as $discount_product)
-                            @if ($edit && $item->product_id == $discount_product->product_id)
-                                <option value="{{ $discount_product->product_id }}"
-                                    {{ collect(old('product_id'))->contains($discount_product->product_id) ? 'selected' : '' }}
+                        @foreach ($records as $product)
+                            @if ($edit && $item->product_id == $product->id)
+                                <option value="{{ $product->product_id }}"
+                                    {{ collect(old('product_id'))->contains($product->id) ? 'selected' : '' }}
                                     selected>
-                                    {{ $discount_product->producto->name }}</option>
+                                    {{ $product->name }}</option>
                             @else
-                                <option value="{{ $discount_product->product_id }}"
-                                    {{ collect(old('product_id'))->contains($discount_product->product_id) ? 'selected' : '' }}>
-                                    {{ $discount_product->producto->name }}</option>
+                                <option value="{{ $product->id }}"
+                                    {{ collect(old('product_id'))->contains($product->id) ? 'selected' : '' }}>
+                                    {{ $product->name }} a</option>
                             @endif
                         @endforeach
                     </select>
                 @else
-                    <p class="w-full">No hay productos con categorias, quieres agregar uno?</p>
+                    <p class="w-full">No hay productos</p>
                 @endif
             @endif
         </div>
@@ -113,7 +113,7 @@
     <div class="w-full md:w-1/2 px-4">
         {{-- START button return --}}
         <x-button-link title="{{ __('Return') }}" color="blue-500" id="button_return" name="button_return"
-            href="{{ route('banners.discounts.index') }}">
+            href="{{ route('banners.features.index') }}">
         </x-button-link>
         {{-- END button return --}}
     </div>
@@ -129,7 +129,7 @@
         <div class="w-full md:w-1/2 px-4">
             {{-- START button edit --}}
             <x-button-link title="{{ __('Edit') }}" color="pink-500" id="button_edit" name="button_edit"
-                href="{{ route('banner_discount.edit', $item) }}">
+                href="{{ route('banner_featured.edit', $item) }}">
             </x-button-link>
             {{-- END button edit --}}
         </div>

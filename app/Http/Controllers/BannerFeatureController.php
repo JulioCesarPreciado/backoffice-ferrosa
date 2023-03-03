@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Banner;
@@ -8,16 +11,15 @@ use Carbon\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Storage;
-use App\Models\ProductDiscount;
+use App\Models\Product;
 
-class BannerDiscountController extends Controller
+class BannerFeatureController extends Controller
 {
-// Función que retorna todos los banners al index.
+ // Función que retorna todos los banners al index.
 public function index()
 {
     // Obtengo todos los registros de la BD ordenados por el más reciente.
-    $banners = Banner::where('type','=','descuentos')->orderBy('validity', 'asc')
+    $banners = Banner::where('type','=','destacados')->orderBy('validity', 'asc')
         ->orderBy('updated_at', 'desc')
         ->get();
 
@@ -41,15 +43,9 @@ public function index()
 public function create()
 {
 
-    $products_in_banners = Banner::where('type', 'descuentos')->where('status', 'ACTIVO')->pluck('product_id')->toArray();
+    $productos = Product::where('validity', '=', 'ACTIVO')->get();
 
-    $products_ids = array_flip($products_in_banners);
-    $products_ids = array_flip($products_ids);
-    $products_ids = array_values($products_ids);
-
-    $productos = ProductDiscount::where('status', '=', 'ACTIVO')->whereNotIn('product_id', $products_ids)->get();
-
-    return view('banners.discounts.create', ["records" => $productos]);
+    return view('banners.features.create', ["records" => $productos]);
 }
 
 // Función que almacena el nuevo registro en la BD
@@ -69,11 +65,11 @@ public function store(Request $request)
         $data = [
             'title'     => $request->title,
             'subtitle'  => $request->subtitle,
-            'thumbnail' => "banner descuentos",
+            'thumbnail' => "banner destacados",
             'url'       => $request->url,
             'status'    => $request->validity ? 'ACTIVO' : 'INACTIVO',
             'validity'  => $request->validity ? 'ACTIVO' : 'INACTIVO',
-            'type'      => 'descuentos',
+            'type'      => 'destacados',
             'product_id'=> $request->product_id
         ];
 
@@ -85,7 +81,7 @@ public function store(Request $request)
             'alert-type' => 'success'
         );
         // Retorna a la vista
-        return redirect()->route('banners.discounts.index')->with($notification);
+        return redirect()->route('banners.features.index')->with($notification);
     } catch (QueryException $e) {
         // Alerta de error
         $notification = array(
@@ -98,31 +94,30 @@ public function store(Request $request)
 }
 
 // Función que manda a la vista show
-public function show(Banner $banner_discount)
+public function show(Banner $banner_featured)
 {
-    $records = ProductDiscount::where('status', '=', 'ACTIVO')->get();
-    return view('banners.discounts.show', compact('banner_discount', 'records'));
+    $records = Product::where('status', '=', 'ACTIVO')->get();
+    return view('banners.features.show', compact('banner_featured', 'records'));
 }
 
 // Función que manda a la vista edit
-public function edit(Banner $banner_discount)
+public function edit(Banner $banner_featured)
 {
-    $products_in_banners = Banner::where('type', 'descuentos')->where('status', 'ACTIVO')->pluck('product_id')->toArray();
+    $products_in_banners = Banner::where('type', 'destacados')->where('status', 'ACTIVO')->pluck('product_id')->toArray();
 
     $products_ids = array_flip($products_in_banners);
     $products_ids = array_flip($products_ids);
     $products_ids = array_values($products_ids);
 
-    $products_ids = array_filter($products_ids, function($item) use($banner_discount) {
-        return $item != $banner_discount->product_id;
+    $products_ids = array_filter($products_ids, function($item) use($banner_featured) {
+        return $item != $banner_featured->product_id;
     });
-
-    $records = ProductDiscount::where('status', '=', 'ACTIVO')->whereNotIn('product_id', $products_ids)->get();
-    return view('banners.discounts.edit', compact('banner_discount', 'records'));
+    $records = Product::where('status', '=', 'ACTIVO')->whereNotIn('id', $products_ids)->get();
+    return view('banners.features.edit', compact('banner_featured', 'records'));
 }
 
 // Función que actualiza el registro en la BD
-public function update(Request $request, Banner $banner_discount)
+public function update(Request $request, Banner $banner_featured)
 {
     // Validación de los campos recibidos
     $request->validate([
@@ -130,12 +125,12 @@ public function update(Request $request, Banner $banner_discount)
         'subtitle'  => 'nullable|string',
         'thumbnail' => 'nullable|image',
         'url'       => 'nullable|url',
-        'product_id'=> 'required|unique:banners,product_id,' .$banner_discount->id,
+        'product_id'=> 'required|unique:banners,product_id,' .$banner_featured->id,
         'validity'  => 'nullable|string',
     ]);
-    
+
     try {
-        
+
         // Preparo los datos a actualizar
         $data = [
             'title'             => $request->title,
@@ -150,7 +145,7 @@ public function update(Request $request, Banner $banner_discount)
         ];
 
         // Actualiza el registro en la BD
-        $banner_discount->update($data);
+        $banner_featured->update($data);
 
         // Alerta de exito
         $notification = array(
@@ -158,7 +153,7 @@ public function update(Request $request, Banner $banner_discount)
             'alert-type' => 'success'
         );
         // Retorna a la vista
-        return redirect()->route('banners.discounts.index')->with($notification);
+        return redirect()->route('banners.features.index')->with($notification);
     } catch (QueryException $e) {
         // Alerta de error
         $notification = array(
@@ -171,10 +166,10 @@ public function update(Request $request, Banner $banner_discount)
 }
 
 // Función que elimina el registro de la BD
-public function destroy(Banner $banner_discount)
+public function destroy(Banner $banner_featured)
 {
     try {
-        $banner_discount->delete();
+        $banner_featured->delete();
         return __('Record disabled!');
     } catch (QueryException $e) {
         return $e->errorInfo[2];

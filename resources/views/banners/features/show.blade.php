@@ -13,8 +13,8 @@
         title="{{ __('Show')}} {{ __('Banner')}}"
         icon="fas fa-images"
         {{-- route='' --}}
-        form='banners.discounts.form'
-        :item='$banner_discount'
+        form='banners.features.form'
+        :item='$banner_featured'
         :create='false'
         :show='true'
         :edit='false'

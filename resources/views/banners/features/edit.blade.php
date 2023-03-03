@@ -10,14 +10,14 @@
 {{-- Contenido --}}
 @section('content')
     <x-crud
-        title="{{ __('Show')}} {{ __('Banner')}}"
+        title="{{ __('Edit')}} {{ __('Banner')}}"
         icon="fas fa-images"
-        {{-- route='' --}}
-        form='banners.discounts.form'
-        :item='$banner_discount'
+        route='banner_featured.update'
+        form='banners.features.form'
+        :item='$banner_featured'
         :create='false'
-        :show='true'
-        :edit='false'
+        :show='false'
+        :edit='true'
         :records="$records"
         >
     </x-crud>

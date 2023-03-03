@@ -81,6 +81,7 @@
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 confirmButtonText: "{{ __('Disable record!') }}",
+                cancelButtonText: "{{ __('Cancel') }}"
             }).then((result) => {
                 if (result.isConfirmed) {
                     disableRecord(id)
@@ -199,6 +200,7 @@
                             var show = h('a', {
                                 href: urlShow,
                                 className: 'fas fa-eye p-4  mr-1 text-white p-3 text-center inline-flex items-center justify-center w-10  shadow-lg rounded-full bg-yellow-500',
+                                title: "{{__('Show')}}"
                             }, '');
                         @endif
 
@@ -209,16 +211,18 @@
                             var edit = h('a', {
                                 href: urlEdit,
                                 className: 'fas fa-edit p-4  mr-1 text-white p-3 text-center inline-flex items-center justify-center w-10  shadow-lg rounded-full bg-blue-500',
+                                title: "{{__('Edit')}}"
                             }, '');
                             @endif
 
                         @if ($delete)
-                            if(row.cells[5].data == 'ACTIVO') {
+                            if(row.cells[row.cells.length-2].data == 'ACTIVO') {
                                 var deletethis = h('button', {
                                     className: 'fas fa-trash p-4  mr-1  text-white p-3 text-center inline-flex items-center justify-center w-10  shadow-lg rounded-full bg-red-500',
                                     onClick: () => myConfirm(row.cells[0].data),
+                                    title: "{{__('Delete')}}"
                                 }, '');
-                            } else if(row.cells[5].data == 'INACTIVO') {
+                            } else if(row.cells[row.cells.length-2].data == 'INACTIVO') {
                                 var deletethis = h('button', {
                                     className: 'fas fa-trash p-5  text-white p-3 text-center inline-flex items-center justify-center w-10  shadow-lg rounded-full bg-gray-400 ',
                                     disabled: true

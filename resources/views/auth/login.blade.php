@@ -90,7 +90,7 @@
                                     class="flex justify-center w-full p-3 font-semibold tracking-wide text-gray-100 transition duration-500 ease-in bg-blue-400 rounded-full shadow-lg cursor-pointer hover:bg-blue-500"
                                     @endif
                                     >
-                                    {{ __('Log in') }}
+                                    {{ __('login in') }}
                                 </button>
                             </div>
                         </div>
