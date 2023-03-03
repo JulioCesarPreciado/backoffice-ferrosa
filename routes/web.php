@@ -42,6 +42,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('discount_banner', function () {
         return view('banners.discounts.index');
     })->name('banners.discounts.index');
+    //Rutas para los banners discounts
+    Route::resource('banner_featured', 'App\Http\Controllers\BannerFeatureController');
+    Route::get('featured_banner', function () {
+            return view('banners.features.index');
+        })->name('banners.features.index');
     // Ruta que redirige a la vista de productos con descuento
     Route::get('products-discount', function () {
         return view('products.products-discount.index');
