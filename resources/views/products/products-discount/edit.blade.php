@@ -16,7 +16,7 @@
                     <div class="text-center flex justify-between">
                         <h6 class="text-slate-700 text-xl font-bold">
                             <div
-                                class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-blue-700">
+                                class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-{{ $setting->color }}-700">
                                 <i class="fas fa-user-tag"></i>
                             </div>
                             {{ __('Discounts') }}
@@ -213,7 +213,7 @@
                     success: function(data) {
                         //en el edit siempre cargara el producto, al entrar o al fallar la validación, entonces siempre se tendrá que añadir un option
                         $("#product_id").append(`<option id="${data.id}">${data.name}</option>`);
-                        
+
                         product_price = data.price
                         $('#product_price').val(`$ ${data.price}`)
                         if ($('#percentage').val() != "" && $('#percentage').val() > 0 && $('#percentage').val() < 100) {

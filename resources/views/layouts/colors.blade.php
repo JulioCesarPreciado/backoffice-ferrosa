@@ -9,7 +9,7 @@
 
 <div class="relative bg-red-700 md:pt-32 pb-32 pt-12"></div>
 <div class="relative bg-green-700 md:pt-32 pb-32 pt-12"></div>
-<div class="relative bg-blue-700 md:pt-32 pb-32 pt-12"></div>
+<div class="relative bg-{{ $setting->color }}-700 md:pt-32 pb-32 pt-12"></div>
 <div class="relative bg-purple-700 md:pt-32 pb-32 pt-12"></div>
 <div class="relative bg-gray-700 md:pt-32 pb-32 pt-12"></div>
 <div class="relative bg-pink-700 md:pt-32 pb-32 pt-12"></div>
