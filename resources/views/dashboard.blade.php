@@ -9,17 +9,6 @@
 @endsection
 {{-- Contenido --}}
 @section('content')
-    {{-- START mensaje --}}
-    <div class="flex flex-wrap">
-        <div class="w-full px-4">
-            <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                <h5 class="text-slate-100 uppercase font-bold text-xs">
-
-                </h5>
-            </div>
-        </div>
-    </div>
-    {{-- END mensaje --}}
     <div class="flex flex-wrap mt-4">
         {{-- START Venta del Dia --}}
         <x-indicator name="Daily Sales" id="sale_day" color="purple" icon="fas fa-dollar-sign">
