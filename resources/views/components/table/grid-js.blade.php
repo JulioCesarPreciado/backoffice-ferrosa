@@ -5,7 +5,7 @@
                 <h6 class="text-slate-700 text-xl font-bold">
                     @if (!$icon == "")
                         <div
-                        class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-blue-700">
+                        class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-{{$setting->color}}-700">
                         <i class="{{ $icon }}"></i>
                     </div>
                     @endif
@@ -17,7 +17,7 @@
                     <div class="flex justify-end">
                         <x-button-link
                             title="{{ __('Add ' ) }} {{ __( $url ) }}"
-                            color="green-500"
+                            color="{{$setting->color}}-700"
                             id="button"
                             name="button"
                             href="{{ route( $url . '.create') }}">

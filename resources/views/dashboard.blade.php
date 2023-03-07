@@ -30,7 +30,7 @@
     </div>
     {{-- END PEDIDOS PENDIENTES --}}
     <div class="pt-5">
-        <x-table.grid-js title="{{ __('Recent Orders') }}" icon="" url="dashboards" parameter="dashboard"
+        <x-table.grid-js title="{{ __('Recent Orders') }}" icon="fas fa-box" url="dashboards" parameter="dashboard"
             :create="false" :show="false" :edit="false" :delete="false">
 
             {{-- Aquí se ponen las columnas GridJs --}}
