@@ -66,6 +66,7 @@
     "Public Key": "Llave Publica",
     "Private Key": "Llave Privada",
     "Validity": "Validez",
+    "validity": "Activo",
     "Invalid data entered! ": "Datos invalidos introducidos!",
     "Daily Sales": "Venta Del Dia",
     "Monthly Sales": "Venta Mensual",

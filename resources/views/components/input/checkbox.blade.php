@@ -5,5 +5,5 @@
     @if ($value == 'ACTIVO') checked @endif @if ($show) disabled @endif>
 
 <label for="{{ $id }}" class=" uppercase text-slate-600 text-xs font-bold mb-2">
-    {{ $title }}
+    {{ __($title) }}
 </label>
