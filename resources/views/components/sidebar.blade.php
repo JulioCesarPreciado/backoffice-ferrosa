@@ -96,10 +96,9 @@
             {{-- End cupones-- }}
 
             {{-- START Banners --}}
-            <x-sidebar.unordered-list title='Banners' icon='fa fa-cog' :route='$route' :routes="['banners.sliders.index']">
+            <x-sidebar.unordered-list title='Banners' icon='fa fa-cog' :route='$route' :routes="['banners.sliders.index','banners.discounts.index','banners.features.index','banners.characteristics.index','banner.create']">
                 {{-- Aquí se ponen los datos de los listitem que irian dentro del unordered-list --}}
                 <x-slot name="list_items">
-
                     {{-- START Slider --}}
                     <x-sidebar.list-item title='Collections' icon='fa fa-images' :route='$route'
                         href='banners.sliders.index' />

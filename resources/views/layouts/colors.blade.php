@@ -203,3 +203,11 @@
 <div class="hover:border-pink-500"></div>
 <div class="hover:border-yellow-500"></div>
 
+<div class="hover:border-red-300"></div>
+<div class="hover:border-green-300"></div>
+<div class="hover:border-blue-300"></div>
+<div class="hover:border-purple-300"></div>
+<div class="hover:border-gray-300"></div>
+<div class="hover:border-pink-300"></div>
+<div class="hover:border-yellow-300"></div>
+
