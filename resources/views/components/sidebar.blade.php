@@ -155,11 +155,11 @@
                     {{-- START END --}}
 
                     {{-- START FAQ --}}
-                    <x-sidebar.list-item title='FAQ' icon='fas fa-question-circle' :route='$route' />
+                    <x-sidebar.list-item title='FAQ' icon='fas fa-question-circle' :route='$route' href='site_settings.faq.index' />
                     {{-- START FAQ --}}
 
                     {{-- START About US --}}
-                    <x-sidebar.list-item title='About Us' icon='fas fa-address-card' :route='$route' />
+                    <x-sidebar.list-item title='About Us' icon='fas fa-address-card' :route='$route' href='about.index' />
                     {{-- END About Us --}}
 
                     {{-- START API --}}
