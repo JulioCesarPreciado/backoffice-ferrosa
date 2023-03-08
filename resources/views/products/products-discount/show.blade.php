@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-                        <div class="flex justify-center">
+                    <div class="flex justify-center">
                         <div
                             class="flex flex-wrap items-center border-none border-teal-500 w-full  md:w-32-6per pt-5 md:pt-0">
                             <div class="flex flex-col justify-around items-center w-full">
@@ -33,10 +33,10 @@
                                 <span class="mt-2">{{ $product_discount->producto->name }}</span>
                             </div>
                         </div>
-                        <div
-                            class="flex flex-wrap items-center border-none border-teal-500 md:w-32-6per pt-5 md:pt-0 p-4">
+                        <div class="flex flex-wrap items-center border-none border-teal-500 md:w-32-6per pt-5 md:pt-0 p-4">
 
-                            <label for="discount_start_date" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                            <label for="discount_start_date"
+                                class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                                 {{ __('Discount start date') }}</label>
                             <input name="discount_start_date" id="discount_start_date"
                                 value="{{ $product_discount->discount_start_date }}"
@@ -44,8 +44,7 @@
                                 placeholder="{{ __('Discount start date') }}" required disabled>
                         </div>
 
-                        <div
-                            class="flex flex-wrap items-center border-none border-teal-500 p-4 md:w-32-6per pt-5 md:pt-0">
+                        <div class="flex flex-wrap items-center border-none border-teal-500 p-4 md:w-32-6per pt-5 md:pt-0">
 
                             <label for="discount_end_date" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                                 {{ __('Discount end date') }}</label>
@@ -54,40 +53,36 @@
                                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                 placeholder="{{ __('Discount end date') }}" required disabled>
                         </div>
+                    </div>
+                    <div class="flex flex-wrap items-center border-none border-teal-500 w-full  md:w-32-6per pt-5 md:pt-0">
+                        <label for="discount" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                            {{ __('Product price') }}</label>
+                        <input placeholder="{{ __('Product price') }}" name="product_price"
+                            value="$ {{ $product_discount->producto->price }}" disabled
+                            class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                    </div>
+                    <div class="flex flex-wrap items-center border-none border-teal-500 w-full md:w-32-6per pt-5 md:pt-0">
+                        <label for="percentage" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                            {{ __('Percentage') }}</label>
+                        <input id="percentage" name="percentage" placeholder="{{ __('Percentage') }}"
+                            class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                            value="{{ $product_discount->percentage }} %"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+                            disabled>
+                    </div>
+                    <div class="flex flex-wrap items-center border-none border-teal-500 w-full  md:w-32-6per pt-5 md:pt-0">
+                        <label for="discount" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                            {{ __('Discount') }}</label>
+                        <input placeholder="{{ __('Discount') }}" name="discount"
+                            value="$ {{ $product_discount->discount }}" disabled
+                            class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                    </div>
+                    <div class="flex flex-wrap mt-6">
+                        <div class="w-full md:w-1/2 px-4">
+                            <x-button-link title="{{ __('Return') }}" color="blue-500" id="button_return" name="button_return"
+                                href="{{ route('products.discount.index') }}" />
                         </div>
-                        <div
-                            class="flex flex-wrap items-center border-none border-teal-500 w-full  md:w-32-6per pt-5 md:pt-0">
-                            <label for="discount" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
-                                {{ __('Product price') }}</label>
-                            <input placeholder="{{ __('Product price') }}" name="product_price" value="$ {{ $product_discount->producto->price }}"
-                                disabled
-                                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-                        </div>
-                        <div
-                            class="flex flex-wrap items-center border-none border-teal-500 w-full md:w-32-6per pt-5 md:pt-0">
-                            <label for="percentage" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
-                                {{ __('Percentage') }}</label>
-                            <input id="percentage" name="percentage" placeholder="{{ __('Percentage') }}"
-                                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                value="{{ $product_discount->percentage }} %"
-                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
-                                disabled>
-                        </div>
-                        <div
-                            class="flex flex-wrap items-center border-none border-teal-500 w-full  md:w-32-6per pt-5 md:pt-0">
-                            <label for="discount" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
-                                {{ __('Discount') }}</label>
-                            <input placeholder="{{ __('Discount') }}" name="discount" value="$ {{ $product_discount->discount }}"
-                                disabled
-                                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-                        </div>
-                        <div class="flex flex-wrap mt-6">
-                            <div class="w-full md:w-1/2 px-4">
-                                <a href="{{ route('products.discount.index') }}" class="bg-blue-500 text-white active:bg-blue-500 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button">
-                                    {{ __('Return') }}
-                                </a>
-                            </div>
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -116,8 +111,14 @@
             });
 
             /* Recuperando la instancia de flatpickr */
-            flatpickr("#discount_start_date", {inline:true,allowInput: false});
-            flatpickr("#discount_end_date", {inline:true, allowInput: false});
+            flatpickr("#discount_start_date", {
+                inline: true,
+                allowInput: false
+            });
+            flatpickr("#discount_end_date", {
+                inline: true,
+                allowInput: false
+            });
         });
     </script>
 @endpush

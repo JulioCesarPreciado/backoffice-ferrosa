@@ -96,22 +96,35 @@
             {{-- End cupones-- }}
 
             {{-- START Banners --}}
-            <x-sidebar.unordered-list title='Banners' icon='fa fa-cog' :route='$route' :routes="['banners.sliders.index','banners.discounts.index','banners.features.index','banners.characteristics.index','banner.create','banner.edit','banners.discounts.index','banner_discount.create','banner_discount.edit','banners.features.index','banner_featured.create','banner_featured.edit']">
+            <x-sidebar.unordered-list title='Banners' icon='fa fa-cog' :route='$route' :routes="[
+                'banners.sliders.index',
+                'banners.discounts.index',
+                'banners.features.index',
+                'banners.characteristics.index',
+                'banner.create',
+                'banner.edit',
+                'banners.discounts.index',
+                'banner_discount.create',
+                'banner_discount.edit',
+                'banners.features.index',
+                'banner_featured.create',
+                'banner_featured.edit',
+            ]">
                 {{-- Aquí se ponen los datos de los listitem que irian dentro del unordered-list --}}
                 <x-slot name="list_items">
                     {{-- START Slider --}}
                     <x-sidebar.list-item title='Collections' icon='fa fa-images' :route='$route'
-                        href='banners.sliders.index' :routes="['banners.sliders.index','banner.create','banner.edit']"/>
+                        href='banners.sliders.index' :routes="['banners.sliders.index', 'banner.create', 'banner.edit']" />
                     {{-- END Slider --}}
 
                     {{-- START banner discounts --}}
                     <x-sidebar.list-item title='Product discounts' icon='fa fa-images' :route='$route'
-                        href='banners.discounts.index' :routes="['banners.discounts.index','banner_discount.create','banner_discount.edit']" />
+                        href='banners.discounts.index' :routes="['banners.discounts.index', 'banner_discount.create', 'banner_discount.edit']" />
                     {{-- END banner discounts --}}
 
                     {{-- START banner Featured Products --}}
                     <x-sidebar.list-item title='Featured Products' icon='fa fa-images' :route='$route'
-                        href='banners.features.index' :routes="['banners.features.index','banner_featured.create','banner_featured.edit']"/>
+                        href='banners.features.index' :routes="['banners.features.index', 'banner_featured.create', 'banner_featured.edit']" />
                     {{-- END banner Featured Products --}}
 
                     {{-- START banner caracteristicas --}}
@@ -123,53 +136,65 @@
             </x-sidebar.unordered-list>
             {{-- END Banners --}}
             {{-- START Products --}}
-            <x-sidebar.unordered-list title='Products' icon='fas fa-store-alt' :route='$route' :routes="['products.discount.index', 'odoo-products.index','product-discount.create','product-discount.edit','product-discount.show']">
+            <x-sidebar.unordered-list title='Products' icon='fas fa-store-alt' :route='$route' :routes="[
+                'products.discount.index',
+                'odoo-products.index',
+                'product-discount.create',
+                'product-discount.edit',
+                'product-discount.show',
+            ]">
                 {{-- Aquí se ponen los datos de los listitem que irian dentro del unordered-list --}}
                 <x-slot name="list_items">
                     <x-sidebar.list-item title='Discounts' icon='fas fa-user-tag' :route='$route'
-                        href='products.discount.index' :routes="['products.discount.index','product-discount.create','product-discount.edit','product-discount.show']"/>
+                        href='products.discount.index' :routes="[
+                            'products.discount.index',
+                            'product-discount.create',
+                            'product-discount.edit',
+                            'product-discount.show',
+                        ]" />
                     <x-sidebar.list-item title='Update products' icon='fas fa-download' :route='$route'
-                        href='odoo-products.index' :routes="['odoo-products.index']"/>
+                        href='odoo-products.index' :routes="['odoo-products.index']" />
                 </x-slot>
             </x-sidebar.unordered-list>
             {{-- END Products --}}
             {{-- START Emails --}}
-            <x-sidebar.unordered-list title='Emails' icon='fa fa-envelope' :route='$route' :routes="['newsletters.index']">
+            <x-sidebar.unordered-list title='Emails' icon='fa fa-envelope' :route='$route' :routes="['newsletters.index','newsletter.create','newsletter.edit','newsletter.show']">
                 {{-- Aquí se ponen los datos de los listitem que irian dentro del unordered-list --}}
                 <x-slot name="list_items">
                     {{-- START Newsletter --}}
                     <x-sidebar.list-item title='Newsletter' icon='far fa-newspaper' :route='$route'
-                        href='newsletters.index' />
+                        href='newsletters.index' :routes="['newsletters.index','newsletter.create','newsletter.edit','newsletter.show']"/>
                     {{-- END Newsletter --}}
                 </x-slot>
             </x-sidebar.unordered-list>
             {{-- END Emails --}}
 
             {{-- START Site Settings --}}
-            <x-sidebar.unordered-list title='Site Settings' icon='fa fa-cog' :route='$route' :routes="['configs.index', 'site_settings.faq.index', 'seo.index', 'about.index', 'apis.index']">
+            <x-sidebar.unordered-list title='Site Settings' icon='fa fa-cog' :route='$route' :routes="['configs.index', 'site_settings.faq.index', 'seo.index', 'about.index', 'apis.index','faq.create','faq.edit','faq.show']">
                 {{-- Aquí se ponen los datos de los listitem que irian dentro del unordered-list --}}
                 <x-slot name="list_items">
                     {{-- START SEO --}}
-                    <x-sidebar.list-item title='SEO' icon='fa fa-search' :route='$route' href='seo.index' />
+                    <x-sidebar.list-item title='SEO' icon='fa fa-search' :route='$route' href='seo.index' :routes="['seo.index']"/>
                     {{-- START END --}}
 
                     {{-- START FAQ --}}
-                    <x-sidebar.list-item title='FAQ' icon='fas fa-question-circle' :route='$route' href='site_settings.faq.index' />
+                    <x-sidebar.list-item title='FAQ' icon='fas fa-question-circle' :route='$route'
+                        href='site_settings.faq.index' :routes="['site_settings.faq.index','faq.create','faq.edit','faq.show']" />
                     {{-- START FAQ --}}
 
                     {{-- START About US --}}
-                    <x-sidebar.list-item title='About Us' icon='fas fa-address-card' :route='$route' href='about.index' />
+                    <x-sidebar.list-item title='About Us' icon='fas fa-address-card' :route='$route'
+                        href='about.index' :routes="['about.index']" />
                     {{-- END About Us --}}
 
                     {{-- START API --}}
-                    <x-sidebar.list-item title='Apis' icon='fas fa-key' :route='$route' href='apis.index' />
+                    <x-sidebar.list-item title='Apis' icon='fas fa-key' :route='$route' href='apis.index' :routes="['apis.index']" />
                     {{-- END API --}}
 
                     {{-- START Settings --}}
                     <x-sidebar.list-item title='Settings' icon='fas fa-tools' :route='$route'
-                        href='configs.index' />
+                        href='configs.index' :routes="['configs.index']" />
                     {{-- END Settings --}}
-
                 </x-slot>
             </x-sidebar.unordered-list>
             {{-- END Site Settings --}}
