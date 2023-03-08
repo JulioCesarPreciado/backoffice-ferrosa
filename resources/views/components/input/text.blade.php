@@ -1,4 +1,4 @@
-<div class="relative w-full mb-3">
+<div class="relative w-full mb-3 mt-6">
     <label class="block uppercase text-slate-600 text-xs font-bold mb-2" htmlFor="{{ $name }}">
         {{ __($title) }}
     </label>

@@ -7,6 +7,32 @@
         <x-input.select2 id="product_id" name="product_id" title="Product" class="producto-select" />
         {{-- Fechas del descuento --}}
         <x-input.date id="discount_start_date" name="discount_start_date" title="Discount start date" :item="$item->discount_start_date" />
+        <x-input.date id="discount_end_date" name="discount_end_date" title="Discount end date" :item="$item->discount_end_date" />
+        {{-- Precio original del producto --}}
+        <x-input.text id="product_price" name="product_price" title="Product price" show />
+        <div class="flex flex-wrap items-center border-none border-teal-500 w-full md:w-32-6per pt-5 md:pt-0">
+            <label for="percentage" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                {{ __('Percentage') }}</label>
+            <input id="percentage" name="percentage" id="percentage" placeholder="{{ __('Percentage') }}"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                value="{{ old('', $item->percentage) }}"
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+        </div>
+        <div class="flex flex-wrap items-center border-none border-teal-500 w-full  md:w-32-6per pt-5 md:pt-0">
+            <label for="discount" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                {{ __('Discount') }}</label>
+            <input placeholder="{{ __('Discount') }}" id="discount" name="discount"
+                value="{{ old('discount', $item->discount) }}" readonly
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+        </div>
+        <div class="w-full px-4 mt-4">
+            <input type="checkbox" id="status" @if ($item->status == 'ACTIVO') checked @endif name="status"
+                value="{{ old('status', $item->status) }}"
+                class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150 hover:bg-slate-300">
+            <label for="status" class=" uppercase text-slate-600 text-xs font-bold mb-2 ml-2">
+                {{ __('Active') }}
+            </label>
+        </div>
     </div>
 </div>
 {{-- END form inputs --}}
@@ -185,6 +211,7 @@
                         $("#product_id").append(`<option id="${data.id}">${data.name}</option>`);
 
                         product_price = data.price
+
                         $('#product_price').val(`$ ${data.price}`)
                         if ($('#percentage').val() != "" && $('#percentage').val() > 0 && $(
                                 '#percentage').val() < 100) {
@@ -204,71 +231,3 @@
         });
     </script>
 @endpush
-{{--
-<div class="flex flex-wrap items-center border-none border-teal-500 md:w-32-6per pt-5 md:pt-0">
-
-    <label for="vigencia_inicial" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
-        {{ __('Discount start date') }}</label>
-    <input name="discount_start_date" id="discount_start_date"
-        value="{{ old('discount_start_date', $product_discount->discount_start_date) }}"
-        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-        placeholder="{{ __('Discount start date') }}" required>
-</div>
-
-<div class="flex flex-wrap items-center border-none border-teal-500 md:w-32-6per pt-5 md:pt-0">
-
-    <label for="vigencia_final" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
-        {{ __('Discount end date') }}</label>
-    <input name="discount_end_date" id="discount_end_date"
-        value="{{ old('discount_end_date', $product_discount->discount_end_date) }}"
-        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-        placeholder="{{ __('Discount end date') }}" required>
-</div>
-<div class="flex flex-wrap items-center border-none border-teal-500 w-full  md:w-32-6per pt-5 md:pt-0">
-    <label for="product_price" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
-        {{ __('Product price') }}</label>
-    <input placeholder="{{ __('Product price') }}"
-        value="{{ old('product_price', $product_discount->producto->price) }}" id="product_price"
-        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-        disabled>
-</div>
-<div class="flex flex-wrap items-center border-none border-teal-500 w-full md:w-32-6per pt-5 md:pt-0">
-    <label for="percentage" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
-        {{ __('Percentage') }}</label>
-    <input id="percentage" name="percentage" id="percentage" placeholder="{{ __('Percentage') }}"
-        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-        value="{{ old('', $product_discount->percentage) }}"
-        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
-</div>
-<div class="flex flex-wrap items-center border-none border-teal-500 w-full  md:w-32-6per pt-5 md:pt-0">
-    <label for="discount" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
-        {{ __('Discount') }}</label>
-    <input placeholder="{{ __('Discount') }}" id="discount" name="discount"
-        value="{{ old('discount', $product_discount->discount) }}" readonly
-        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-</div>
-<div class="w-full px-4 mt-4">
-    <input type="checkbox" id="status" @if ($product_discount->status == 'ACTIVO') checked @endif name="status"
-        value="{{ old('status', $product_discount->status) }}"
-        class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150 hover:bg-slate-300">
-    <label for="status" class=" uppercase text-slate-600 text-xs font-bold mb-2 ml-2">
-        {{ __('Active') }}
-    </label>
-</div>
-<div class="flex flex-wrap mt-6">
-    <div class="w-full md:w-1/2 px-4">
-        <a href="{{ route('products.discount.index') }}"
-            class="bg-blue-500 text-white active:bg-blue-500 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-            type="button">
-            {{ __('Return') }}
-        </a>
-    </div>
-    <div class="w-full md:w-1/2 px-4">
-        <button type="submit" id="validar"
-            class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md hover:bg-green-400 outline-none focus:outline-none mr-1 ease-linear transition-all duration-150 w-full">
-            {{ __('Update') }}
-        </button>
-    </div>
-</div>
-
---}}
