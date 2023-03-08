@@ -4,7 +4,7 @@
             autocomplete="off">
             @csrf
 
-            <div class="rounded-t bg-white mb-0 px-2 py-6">
+            <div class="rounded-t bg-white mb-0 px-6 py-6">
                 <div class="text-center flex justify-between">
                     <h6 class="text-slate-700 text-xl font-bold">
                         <div
@@ -13,11 +13,13 @@
                         </div>
                         {{ __('Site settings') }}
                     </h6>
-                    <button
-                        class="bg-green-500 text-white active:bg-green-800 hover:bg-green-600 hover:shadow-xl font-bold uppercase text-xs px-4 py-2 rounded shadow outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-                        type="submit">
-                        {{ __('Update') }}
-                    </button>
+                    <div class="flex justify-end">
+                        <button
+                            class="bg-{{ $setting->color }}-700 text-white active:bg-{{ $setting->color }}-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md hover:bg-{{ $setting->color }}-300 outline-none focus:outline-none mr-1 ease-linear transition-all duration-150 w-full"
+                            type="submit">
+                            {{ __('Update') }}
+                        </button>
+                    </div>
                 </div>
             </div>
 
