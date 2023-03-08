@@ -96,22 +96,22 @@
             {{-- End cupones-- }}
 
             {{-- START Banners --}}
-            <x-sidebar.unordered-list title='Banners' icon='fa fa-cog' :route='$route' :routes="['banners.sliders.index','banners.discounts.index','banners.features.index','banners.characteristics.index','banner.create']">
+            <x-sidebar.unordered-list title='Banners' icon='fa fa-cog' :route='$route' :routes="['banners.sliders.index','banners.discounts.index','banners.features.index','banners.characteristics.index','banner.create','banner.edit','banners.discounts.index','banner_discount.create','banner_discount.edit','banners.features.index','banner_featured.create','banner_featured.edit']">
                 {{-- Aquí se ponen los datos de los listitem que irian dentro del unordered-list --}}
                 <x-slot name="list_items">
                     {{-- START Slider --}}
                     <x-sidebar.list-item title='Collections' icon='fa fa-images' :route='$route'
-                        href='banners.sliders.index' />
+                        href='banners.sliders.index' :routes="['banners.sliders.index','banner.create','banner.edit']"/>
                     {{-- END Slider --}}
 
                     {{-- START banner discounts --}}
                     <x-sidebar.list-item title='Product discounts' icon='fa fa-images' :route='$route'
-                        href='banners.discounts.index' />
+                        href='banners.discounts.index' :routes="['banners.discounts.index','banner_discount.create','banner_discount.edit']" />
                     {{-- END banner discounts --}}
 
                     {{-- START banner Featured Products --}}
                     <x-sidebar.list-item title='Featured Products' icon='fa fa-images' :route='$route'
-                        href='banners.features.index' />
+                        href='banners.features.index' :routes="['banners.features.index','banner_featured.create','banner_featured.edit']"/>
                     {{-- END banner Featured Products --}}
 
                     {{-- START banner caracteristicas --}}
@@ -123,13 +123,13 @@
             </x-sidebar.unordered-list>
             {{-- END Banners --}}
             {{-- START Products --}}
-            <x-sidebar.unordered-list title='Products' icon='fas fa-store-alt' :route='$route' :routes="['products.discount.index', 'odoo-products.index']">
+            <x-sidebar.unordered-list title='Products' icon='fas fa-store-alt' :route='$route' :routes="['products.discount.index', 'odoo-products.index','product-discount.create','product-discount.edit','product-discount.show']">
                 {{-- Aquí se ponen los datos de los listitem que irian dentro del unordered-list --}}
                 <x-slot name="list_items">
                     <x-sidebar.list-item title='Discounts' icon='fas fa-user-tag' :route='$route'
-                        href='products.discount.index' />
+                        href='products.discount.index' :routes="['products.discount.index','product-discount.create','product-discount.edit','product-discount.show']"/>
                     <x-sidebar.list-item title='Update products' icon='fas fa-download' :route='$route'
-                        href='odoo-products.index' />
+                        href='odoo-products.index' :routes="['odoo-products.index']"/>
                 </x-slot>
             </x-sidebar.unordered-list>
             {{-- END Products --}}

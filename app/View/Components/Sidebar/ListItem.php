@@ -12,6 +12,7 @@ class ListItem extends Component
     public $route;
     public $href;
     public $count;
+    public $routes;
 
     /**
      * Create a new component instance.
@@ -23,13 +24,15 @@ class ListItem extends Component
         $icon = 'fas fa-smile-beam',
         $route = 'dashboard',
         $href = 'dashboard',
-        $count = null
+        $count = null,
+        $routes = []
     ) {
         $this->title = $title;
         $this->icon = $icon;
         $this->route = $route;
         $this->href = $href;
         $this->count = $count;
+        $this->routes = $routes;
     }
 
     /**
