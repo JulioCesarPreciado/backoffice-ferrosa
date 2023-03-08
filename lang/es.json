@@ -167,5 +167,6 @@
     "Site logo" : "Logo",
     "Site icon" : "Icono",
     "Site background" : "Fondo en el acceso",
-    "Shades" : "Intensidad del color"
+    "Shades" : "Intensidad del color",
+    "Sign Out" : "Cerrar sesión"
 }
