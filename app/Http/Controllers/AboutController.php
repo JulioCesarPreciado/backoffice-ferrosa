@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Storage;
 
 
 class AboutController extends Controller
@@ -22,37 +23,32 @@ class AboutController extends Controller
     {
         // Validación de los campos recibidos
         $request->validate([
-            'title' => 'required|string',
-            'history' => 'required|string'
+            'title'         => 'required|string',
+            'history'       => 'required|string',
+            'link_video'    => 'nullable|url'
         ]);
 
         try {
 
-            // Obtenemos el archivo del request
-            $file = $request->file('image');
+            $image = $request->file('image');
 
-            $file_name = null;
-            #Revisa si se modifico la imagen y pone la nueva, si no deja la que estaba
-            if (isset($file)) {
-                #Creamos el nombre del archivo
-                $file_name = date('YmdHi') . '_about_' . $file->getClientOriginalName();
-                #Borramos la foto anterior
-                @unlink(public_path('storage/upload/about/' . $about->image));
-                #Lo guardamos
-                $file->move(public_path('storage/upload/about'), $file_name);
-                #Generamos el path donde se guardará
-                $file_name = fullPath()."/storage/upload/about/".$file_name;
+            //recupero el path de la imagen
+            $path_image = $about->image;
+            
+            // Revisa si se modifico la imagen
+            if (isset($image)) {
+                $path_image = $this->saveImage($image, $path_image);
             }
-            // ### END Guardar imagen ###
-            // Busca y actualiza el registro
+
             $data = [
                 'title' => $request->title,
                 'history' => $request->history,
                 'slogan' => $request->slogan,
-                'image' => $file_name,
+                'image' => $path_image,
                 'ceo' => $request->ceo,
                 'mission' => $request->mission,
                 'vision' => $request->vision,
+                'link_video'    => $request->link_video,
                 'id_user_updated' => Auth::user()->id,
                 'updated_by' => Auth::user()->name,
                 'updated_at' => Carbon::now()->setTimezone('America/Mexico_City')
@@ -77,5 +73,22 @@ class AboutController extends Controller
             // Retorna a la vista
             return redirect()->back()->with($notification);
         }
+    }
+
+    private function saveImage($image, $path) 
+    {
+        // Creamos el nombre del archivo
+        $new_image_name = date('YmdHi') . '_icon_' . $image->getClientOriginalName();
+        //separamos la ruta por "/" para obtener el nombre de la imagen guardada
+        $extension = explode('/', $path);
+        //obtenemos el último parametro del array, que siempre va a ser el nombre de la imagen junto a su extensión
+        $file_name = end($extension);
+
+        //borramos la imagen del disco iconos, donde se guardan todas las imagenes de los iconos
+        Storage::disk('iconos')->delete($file_name);
+        // Lo guardamos
+        Storage::putFileAs('upload/iconos/', $image, $new_image_name);
+        // agrega al data la ruta del archivo
+        return env('APP_URL') . "/iconos/". $new_image_name;
     }
 }

@@ -36,8 +36,11 @@
             :required=false :create='$create' :show='$show' :edit='$edit'>
         </x-input.text>
         {{-- END input CEO --}}
-
-
+        {{-- START input YOUTUBE --}}
+        <x-input.text id='link_video' name='link_video' title='video' :value='$create ? null : $item->link_video' cols='4' rows='4'
+            :required=false :create='$create' :show='$show' :edit='$edit'>
+        </x-input.text>
+        {{-- END input YOUTUBE --}}
     </div>
 
 </div>
