@@ -168,5 +168,6 @@
     "Site icon" : "Icono",
     "Site background" : "Fondo en el acceso",
     "Shades" : "Intensidad del color",
-    "Sign Out" : "Cerrar sesión"
+    "Sign Out" : "Cerrar sesión",
+    "You must enter a valid url": "Debes ingresar una url válida"
 }

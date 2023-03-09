@@ -1,6 +1,8 @@
 {{-- START form inputs --}}
 <div class="flex flex-wrap mt-6">
     <div class="w-full px-4">
+        {{-- Alertas --}}
+        @include('layouts.alert')
         {{-- START input TITLE --}}
         <x-input.text id='title' name='title' title='Title' :value='$create ? null : $item->title' :required=true :create='$create'
             :show='$show' :edit='$edit'>

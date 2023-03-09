@@ -26,6 +26,8 @@ class AboutController extends Controller
             'title'         => 'required|string',
             'history'       => 'required|string',
             'link_video'    => 'nullable|url'
+        ], [
+            "link_video.url"    => __("You must enter a valid url")
         ]);
 
         try {
