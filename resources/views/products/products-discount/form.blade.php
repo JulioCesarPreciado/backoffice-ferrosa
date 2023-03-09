@@ -9,7 +9,7 @@
         <x-input.date id="discount_start_date" name="discount_start_date" title="Discount start date" :item="$item->discount_start_date ?? null" />
         <x-input.date id="discount_end_date" name="discount_end_date" title="Discount end date" :item="$item->discount_end_date ?? null" />
         {{-- Precio original del producto --}}
-        <x-input.text id="product_price" name="product_price" title="Product price" show />
+        <x-input.text id="product_price" name="product_price" value="$ 0" title="Product price" show />
         <div class="flex flex-wrap items-center border-none border-teal-500 w-full md:w-32-6per pt-5 md:pt-0">
             <label for="percentage" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                 {{ __('Percentage') }}</label>

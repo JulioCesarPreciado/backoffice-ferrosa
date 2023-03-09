@@ -25,7 +25,6 @@ class ConfigController extends Controller
     }
 
     // Función que actualiza el registro en la BD
-    // public function updateSiteSettings(Request $request, Config $config)
     public function updateSiteSettings(Request $request)
     {
         // Validamos los campos enviados

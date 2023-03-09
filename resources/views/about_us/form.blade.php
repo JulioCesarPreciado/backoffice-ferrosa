@@ -1,6 +1,8 @@
 {{-- START form inputs --}}
 <div class="flex flex-wrap mt-6">
     <div class="w-full px-4">
+        {{-- Alertas --}}
+        @include('layouts.alert')
         {{-- START input TITLE --}}
         <x-input.text id='title' name='title' title='Title' :value='$create ? null : $item->title' :required=true :create='$create'
             :show='$show' :edit='$edit'>
@@ -36,8 +38,11 @@
             :required=false :create='$create' :show='$show' :edit='$edit'>
         </x-input.text>
         {{-- END input CEO --}}
-
-
+        {{-- START input YOUTUBE --}}
+        <x-input.text id='link_video' name='link_video' title='video' :value='$create ? null : $item->link_video' cols='4' rows='4'
+            :required=false :create='$create' :show='$show' :edit='$edit'>
+        </x-input.text>
+        {{-- END input YOUTUBE --}}
     </div>
 
 </div>
