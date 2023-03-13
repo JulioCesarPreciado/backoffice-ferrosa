@@ -110,7 +110,7 @@
 
 {{-- START buttons return, submit, edit --}}
 <div class="flex flex-wrap mt-6">
-    <div class="w-full md:w-1/2 px-4">
+    <div class="w-full md:w-1/2 px-4 py-4">
         {{-- START button return --}}
         <x-button-link title="{{ __('Return') }}" color="blue-500" id="button_return" name="button_return"
             href="{{ route('banners.features.index') }}">
@@ -119,14 +119,14 @@
     </div>
 
     @if (!$show)
-        <div class="w-full md:w-1/2 px-4">
+        <div class="w-full md:w-1/2 px-4 py-4">
             {{-- START button submit --}}
             <x-button-submit title="{{ __('Save') }}" color="green" id="button_submit" name="button_submit">
             </x-button-submit>
             {{-- END button submit --}}
         </div>
     @else
-        <div class="w-full md:w-1/2 px-4">
+        <div class="w-full md:w-1/2 px-4 py-4">
             {{-- START button edit --}}
             <x-button-link title="{{ __('Edit') }}" color="pink-500" id="button_edit" name="button_edit"
                 href="{{ route('banner_featured.edit', $item) }}">
