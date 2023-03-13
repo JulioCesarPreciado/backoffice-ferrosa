@@ -126,7 +126,7 @@
             {{-- END button submit --}}
         </div>
     @else
-        <div class="w-full md:w-1/2 px-4">
+        <div class="w-full md:w-1/2 px-4 py-4">
             {{-- START button edit --}}
             <x-button-link title="{{ __('Edit') }}" color="pink-500" id="button_edit" name="button_edit"
                 href="{{ route('banner_discount.edit', $item) }}">
