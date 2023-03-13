@@ -58,7 +58,7 @@
             {{-- END input updated by --}}
         </div>
 
-        <div class="w-full md:w-1/2 px-4">
+        <div class="w-full md:w-1/2 px-4 py-4">
             {{-- START input created at --}}
             <div class="relative w-full mb-3">
                 <x-input.text title='Created at' :value='$create ? null : $item->created_at' :readonly=true :create='$create' :show='$show'
@@ -81,7 +81,7 @@
 
 {{-- START buttons return, submit, edit --}}
 <div class="flex flex-wrap mt-6">
-    <div class="w-full md:w-1/2 px-4">
+    <div class="w-full md:w-1/2 px-4 py-4">
         {{-- START button return --}}
         <x-button-link title="{{ __('Return') }}" color="blue-500" id="button_return"
             href="{{ route('products.discount.index') }}" />
@@ -94,7 +94,7 @@
             {{-- END button submit --}}
         </div>
     @else
-        <div class="w-full md:w-1/2 px-4">
+        <div class="w-full md:w-1/2 px-4 py-4">
             {{-- START button edit --}}
             <x-button-link title="{{ __('Edit') }}" color="pink-500" id="button_edit"
                 href="{{ route('product-discount.edit', $item) }}" />

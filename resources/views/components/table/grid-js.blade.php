@@ -1,7 +1,7 @@
-<div class="w-full px-4">
+<div class="w-full px-4 sm:px-1">
     <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-slate-100 border-0">
         <div class="rounded-t bg-white mb-0 px-6 py-6">
-            <div class="text-center flex justify-between">
+            <div class="text-center flex justify-between ">
                 <h6 class="text-slate-700 text-xl font-bold">
                     @if (!$icon == "")
                         <div
@@ -14,7 +14,7 @@
                 </h6>
                 @if ($create)
                     {{-- START button add item --}}
-                    <div class="flex justify-end">
+                    <div class="flex">
                         <x-button-link
                             title="{{ __('Add ' ) }} {{ __( $url ) }}"
                             color="{{$setting->color}}-700"
@@ -336,4 +336,8 @@
     td.gridjs-td:last-child {
         text-align: center;
     }
+
+
+        
+
 </style>

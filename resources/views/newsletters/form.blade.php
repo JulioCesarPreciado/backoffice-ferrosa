@@ -136,7 +136,7 @@
 
 {{-- START buttons return, submit, edit --}}
 <div class="flex flex-wrap mt-6">
-    <div class="w-full md:w-1/2 px-4">
+    <div class="w-full md:w-1/2 px-4 py-4">
         {{-- START button return --}}
         <x-button-link
             title="{{ __('Return') }}"
@@ -149,7 +149,7 @@
     </div>
 
     @if (!$show)
-        <div class="w-full md:w-1/2 px-4">
+        <div class="w-full md:w-1/2 px-4 py-4">
             {{-- START button submit --}}
             <x-button-submit
                 title="{{ __('Save') }}"
